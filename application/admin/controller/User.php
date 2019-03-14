@@ -240,9 +240,8 @@ Class User extends Base{
         $user_id = input("param.user_id");
         $user_password = input("param.user_password");
         $confirm_password = input("param.confirm_password");
-
         if($user_password){
-            if($confirm_password){
+            if(empty($confirm_password)){
                     return $this->error('确认密码不能为空！');
              }
 
