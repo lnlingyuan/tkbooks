@@ -1,0 +1,51 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+
+<div class="contetline" id="searchContent">
+    <div class="content">
+        <div class="cover-nav">
+            <p>&gt; 搜索结果 &gt; <span>{$search_name}</span></p>
+        </div>
+        <div class="ranktypebox" id="shukubox">
+            {if condition="empty(count($data))"}
+            <p style="text-align: center;padding: 40px;color: #f36f20;font-size: 18px;">对不起，没有您搜索的书籍</p>
+            {else /}
+            <ul class="rankboxul clearfix">
+
+                {volist name="data" id="vo"}
+
+                <li>
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}"><img src="__BOOKSIMG__/{$vo.books_img}" width="120" height="160">
+
+                        <h3 class="ellipsis">{$vo.books_name}</h3>
+                        <p class="rzz">作者：{$vo.books_author}</p>
+                        <p>{$types[$vo.books_type]}/{if condition="($vo.books_status == 1)"}完结{else /} 连载{/if}/307145字</p>
+                        <p>最新章节：第一百零八章 黑</p>
+                        <p>更新时间：{$vo.books_time}</p>
+                    </a>
+                </li>
+
+                {/volist}
+
+            </ul>
+
+            {/if}
+
+
+        </div>
+    </div>
+</div>
+<div class="paging fenye">
+    {$data->render()}
+
+</div>
+
+<script>
+    $(function () {
+
+        keywordHighlight("searchContent","{$search_name}");
+
+    })
+</script>
+
+{include file="template/footer" /}

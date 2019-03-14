@@ -1,0 +1,80 @@
+
+<!-- 大家都在搜和搜索历史 S -->
+<div id="searchHotHistory" class="search-hot-history">
+    <div id="searchPopularWords" class="search-popular loading-animation" style="overflow: hidden; transition: height 200ms; height: 96px;">
+
+        <div class="search-title-bar">
+            <h5 class="search-title">大家都在搜</h5>
+        </div>
+        <div class="search-tags">
+            <a href="#" class="btn-line-gray jsSearchLink" >洪荒</a><a href="#" class="btn-line-gray jsSearchLink" >异界</a><a href="#" class="btn-line-gray jsSearchLink" >穿越</a><a href="#" class="btn-line-gray jsSearchLink">重生</a><a href="#" class="btn-line-gray jsSearchLink" >三国</a>
+        </div>
+
+    </div>
+
+    {notempty name="search_arr" }
+    <div id="searchHistory">
+        <div class="search-title-bar">
+            <h5 class="search-title">搜索历史</h5>
+            <div class="search-operate">
+                <a id="clearSearchHistory" href="#" class="search-operate-a">
+                    <svg class="icon icon-delete"><use xlink:href="#icon-delete"></use></svg>清空
+                </a>
+            </div>
+        </div>
+        <div class="search-tags">
+            {volist name="search_arr" id="sa" }
+            <a href="#" class="btn-line-gray jsSearchLink" data-keyword="">{$sa}</a>
+            {/volist}
+
+        </div>
+    </div>
+    {/notempty}
+
+
+</div>
+<!-- 大家都在搜和搜索历史 E -->
+<!-- 搜索提示 S -->
+<div id="searchList" class="search-list" hidden="">
+
+</div>
+<!-- 搜索提示 E -->
+</div>
+
+<script>
+    $(function () {
+
+        function getSearch() {
+            var search = $("input[name='search']").val();
+            if(search){
+                window.location.href = "/Search/index/books_name/"+search;
+            }
+        }
+
+
+
+        //回车快捷查询
+        $(".search-area").keypress(function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+            if (keyCode == 13){
+                getSearch();
+            }
+        });
+
+
+        $(".jsSearchLink").click(function () {
+            var txt = $(this).text();
+            $("input[name='search']").val(txt);
+            getSearch();
+        });
+
+
+        $("#clearSearchHistory").click(function () {
+            $.post('/search/clearSearch','',function () {
+                $("#searchHistory").remove();
+            });
+        });
+
+
+    })
+</script>

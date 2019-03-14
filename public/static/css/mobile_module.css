@@ -1,0 +1,794 @@
+@charset "UTF-8";
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* /yuewen/images */
+/* ../images */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 不折行截字 */
+/* 折行截字 */
+/* 嵌套小三角 */
+/* 实体小三角 */
+/* 父容器用overflow清浮动 */
+/* 父容器不用overflow清除浮动 */
+html {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif; }
+
+body {
+  margin: 0;
+  color: #333;
+  font-size: 0.14rem;
+  height: 100%;
+  overflow-x: hidden; }
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor; }
+
+article, aside, details, figcaption, figure, footer, header, main, nav, section, summary {
+  display: block; }
+
+[hidden], template {
+  display: none; }
+
+svg:not(:root) {
+  overflow: hidden; }
+
+a {
+  background: transparent;
+  text-decoration: none;
+  color: #333; }
+
+a:active {
+  outline: 0; }
+
+img {
+  border: 0;
+  vertical-align: middle; }
+
+button, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0; }
+
+button {
+  overflow: visible; }
+
+button, select {
+  text-transform: none; }
+
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; }
+
+button[disabled], html input[disabled] {
+  cursor: default; }
+
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+input {
+  line-height: normal;
+  border: none;
+  outline: none; }
+
+input[type="checkbox"], input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0; }
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+fieldset {
+  border: 1px solid #C0C0C0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+legend {
+  border: 0;
+  padding: 0; }
+
+textarea {
+  overflow: auto;
+  resize: vertical; }
+
+optgroup {
+  font-weight: bold; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td, th {
+  padding: 0; }
+
+h1, h2, h3, h4, h5, h6, p, figure, form, blockquote {
+  margin: 0; }
+
+ul, ol, li, dl, dd {
+  margin: 0;
+  padding: 0; }
+
+ul, ol {
+  list-style: none outside none; }
+
+h1, h2, h3 {
+  line-height: 2;
+  font-weight: normal; }
+
+h1 {
+  font-size: 1.8rem; }
+
+h2 {
+  font-size: 1.6rem; }
+
+h3 {
+  font-size: 1.4rem; }
+
+em, i {
+  font-style: normal; }
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #CCC; }
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #CCC; }
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #CCC; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+@charset "UTF-8";
+/**
+ * @author yangye
+ * @design xurui;
+ */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* /yuewen/images */
+/* ../images */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 不折行截字 */
+/* 折行截字 */
+/* 嵌套小三角 */
+/* 实体小三角 */
+/* 父容器用overflow清浮动 */
+/* 父容器不用overflow清除浮动 */
+.header {
+  height: 0.4rem;
+  border-bottom: 1px solid #EEE; }
+  .header .icon {
+    width: 0.09rem;
+    height: 0.16rem;
+    margin-top: 10px;
+    vertical-align: -2px; }
+  .header a {
+    display: inline-block;
+    height: 0.4rem;
+    padding-right: 0.2rem; }
+  .header span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.4rem;
+    height: 0.4rem;
+    text-align: center;
+    line-height: 0.4rem; }
+  .header.red {
+    background: #D23E3B; }
+    .header.red a {
+      color: white; }
+@charset "UTF-8";
+/**
+ * @author yangye
+ * @design xurui;
+ */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 本地路径 ../images */
+/* 开发目录路径 /mobile/images */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 不折行截字 */
+/* 折行截字 */
+/* 嵌套小三角 */
+/* 实体小三角 */
+/* 父容器用overflow清浮动 */
+/* 父容器不用overflow清除浮动 */
+.wrap {
+  padding-bottom: 2rem; }
+
+.logo {
+  width: 1.6rem;
+  height: 0.38rem;
+  margin: 0.8rem auto 0.48rem;
+  background: url(/mobile/images/logo.png);
+  background-size: 100%; }
+
+.login-input-wrap {
+  padding: 0.4rem 0.24rem 0; }
+
+.btn-wrap {
+  padding: 0 0.24rem; }
+  .btn-wrap .red-btn, .btn-wrap .blue-btn {
+    display: block;
+    width: 100%;
+    margin: 0.24rem 0 0.1rem;
+    height: 0.4rem;
+    line-height: 0.39rem;
+    border-radius: 100px; }
+  .btn-wrap .flex {
+    width: 100%;
+    overflow: hidden; }
+    .btn-wrap .flex a {
+      float: left; }
+      .btn-wrap .flex a.blue {
+        float: right; }
+
+/* 其他登录 */
+.other-login {
+  margin-top: 0.5rem; }
+  .other-login .qq-login {
+    margin: 0 auto 0.3rem;
+    text-align: center; }
+    .other-login .qq-login li {
+      display: inline-block;
+      margin-right: .5rem; }
+      .other-login .qq-login li:last-of-type {
+        margin-right: 0; }
+    .other-login .qq-login a {
+      display: block; }
+    .other-login .qq-login em {
+      display: block;
+      margin: 0 auto;
+      width: .42rem;
+      height: .42rem;
+      margin-bottom: 0.12rem;
+      background-size: 100%;
+      background-repeat: no-repeat; }
+    .other-login .qq-login .qq {
+      background-image: url(../images/qq.png); }
+    .other-login .qq-login .wechat {
+       background-image: url(../images/wechat.png); }
+    .other-login .qq-login .sms {
+      background-image: url(../images/sms.png); }
+  .other-login .switch-login {
+    text-align: center; }
+    .other-login .switch-login a {
+      color: #999; }
+    .other-login .switch-login .icon-arrow-down {
+      margin: -0.02rem 0 0 0.05rem;
+      width: 0.1rem;
+      height: 0.1rem;
+      transition: .3s; }
+      .other-login .switch-login .icon-arrow-down.up {
+        margin-top: 0.01rem;
+        transform: rotate(180deg); }
+    .other-login .switch-login .other {
+      margin-top: 0.13rem;
+      justify-content: center;
+      opacity: 0; }
+      .other-login .switch-login .other.on a {
+        display: inline-block; }
+      .other-login .switch-login .other a {
+        display: none;
+        width: .36rem;
+        height: .36rem;
+        margin-right: 0.2rem;
+        background-size: 100%;
+        background-repeat: no-repeat; }
+        .other-login .switch-login .other a:last-of-type {
+          margin-right: 0; }
+        .other-login .switch-login .other a.sina {
+          background-image: url(/mobile/images/sina.png); }
+        .other-login .switch-login .other a.we-chat {
+          background-image: url(/mobile/images/wechat.png); }
+        .other-login .switch-login .other a.alipay {
+          background-image: url(/mobile/images/alipay.png); }
+        .other-login .switch-login .other a.baidu {
+          background-image: url(/mobile/images/baidu.png); }
+
+/* 站点图 */
+.site-img {
+  margin: .9rem auto 1.48rem;
+  text-align: center; }
+  .site-img h3 {
+    width: 1.9rem;
+    height: 1.55rem;
+    margin: 0 auto 0.26rem;
+    background: url(/mobile/images/site.png);
+    background-size: 100%; }
+
+/* 确认登录 */
+.login-btn {
+  text-align: center; }
+  .login-btn a {
+    display: block;
+    width: 1.5rem;
+    height: .38rem;
+    line-height: .38rem;
+    margin: 0 auto;
+    border-radius: 100px; }
+    .login-btn a:first-of-type {
+      margin-bottom: .4rem; }
+
+/* 风险提示 */
+.risk-tip-wrap {
+  padding: 0 .32rem;
+  text-align: center; }
+  .risk-tip-wrap .warning {
+    width: 1.2rem;
+    height: .96rem;
+    margin: .8rem auto .4rem;
+    background: url(/mobile/images/warning.png);
+    background-size: 100%; }
+  .risk-tip-wrap p {
+    margin-bottom: 1.15rem;
+    font: 0.14rem/0.22rem "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif;
+    color: #A6A6A6; }
+  .risk-tip-wrap .red-btn, .risk-tip-wrap .blue-btn {
+    display: block;
+    width: 100%;
+    margin: .24rem 0;
+    height: .4rem;
+    line-height: .4rem; }
+  .risk-tip-wrap .not-tip {
+    margin: .26rem 0 0;
+    color: #A6A6A6; }
+    .risk-tip-wrap .not-tip input, .risk-tip-wrap .not-tip label {
+      display: inline-block;
+      vertical-align: middle; }
+    .risk-tip-wrap .not-tip label {
+      margin-top: -.04rem; }
+
+/* 账号异常登录验证身份 */
+.account-verify p {
+  margin-bottom: .2rem; }
+  .account-verify p.tip {
+    font-size: 0.12rem; }
+    .account-verify p.tip.red {
+      color: #ED424B;
+      text-align: left; }
+.account-verify .red-btn, .account-verify .blue-btn {
+  margin-bottom: .8rem; }
+
+.risk-code li {
+  padding: 0 0 0 .1rem; }
+  .risk-code li input {
+    width: 1.6rem !important;
+    float: left; }
+  .risk-code li .reset {
+    float: right;
+    font-size: .12rem;
+    padding: 0 .1rem;
+    line-height: .4rem; }
+    .risk-code li .reset.disabled {
+      color: #999;
+      cursor: default; }
+
+.change-account a {
+  font-size: .12rem;
+  color: #999; }@charset "UTF-8";
+/**
+ * @author yangye
+ * @design xurui;
+ */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* /yuewen/images */
+/* ../images */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 不折行截字 */
+/* 折行截字 */
+/* 嵌套小三角 */
+/* 实体小三角 */
+/* 父容器用overflow清浮动 */
+/* 父容器不用overflow清除浮动 */
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.hidden {
+  display: none; }
+
+/* 父容器清浮动 */
+.cf {
+  zoom: 1; }
+  .cf:before, .cf:after {
+    display: table;
+    content: ''; }
+  .cf:after {
+    clear: both; }
+
+/* inline-block 去除元素之间空隙 */
+.dib-wrap {
+  font-size: 0; }
+  .dib-wrap a, .dib-wrap span {
+    display: inline-block;
+    vertical-align: top;
+    letter-spacing: normal;
+    word-spacing: normal; }
+
+/* inline-block 无需去除空隙 */
+.dib-box a, .dib-box span {
+  display: inline-block;
+  vertical-align: top;
+  letter-spacing: normal;
+  word-spacing: normal; }
+@charset "UTF-8";
+/**
+ * @author yangye
+ * @design xurui;
+ */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 本地路径 ../images */
+/* 开发目录路径 /mobile/images */
+/**
+ * @author yangye
+ * @design yangxuesong;
+ */
+/* 不折行截字 */
+/* 折行截字 */
+/* 嵌套小三角 */
+/* 实体小三角 */
+/* 父容器用overflow清浮动 */
+/* 父容器不用overflow清除浮动 */
+.success {
+  color: #8CCD0A; }
+
+.error {
+  color: #ED4259; }
+
+/* 字体颜色 */
+.red {
+  color: #ED424B; }
+
+.blue {
+  color: #2581FA; }
+
+.grey {
+  color: #CCC; }
+
+/*通用input列表样式*/
+.input-list li {
+  background: #F6F7F9;
+  margin-bottom: 0.12rem;
+  border-radius: 4px;
+  overflow: hidden; }
+  .input-list li svg {
+    width: 0.18rem;
+    height: 0.18rem;
+    color: #999; }
+  .input-list li img.ff {
+    width: 0.18rem;
+    height: 0.18rem; }
+  .input-list li.error {
+    border: 1px solid #ED424B; }
+  .input-list li .icon-user, .input-list li .icon-password {
+    margin: 0.08rem 0.12rem; }
+  .input-list li input {
+    display: inline-block;
+    vertical-align: middle;
+    width: 82%;
+    height: .4rem;
+    padding: .1rem 0;
+    line-height: .2rem;
+    background: none; }
+  .input-list li.password-input {
+    position: relative;
+    z-index: 1; }
+    .input-list li.password-input input {
+      width: 66%; }
+    .input-list li.password-input .icon-del, .input-list li.password-input .icon-look, .input-list li.password-input .icon-nolook {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.1rem;
+      color: #CCC; }
+    .input-list li.password-input .icon-del {
+      right: 0.4rem; }
+  .input-list li.code a {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.14rem;
+    height: 0.4rem; }
+  .input-list li.code input {
+    width: 50%;
+    padding-right: 0.1rem; }
+  .input-list li.code img {
+    margin-top: 0.04rem;
+    width: 0.8rem;
+    height: 0.32rem; }
+  .input-list li.code .icon-reload {
+    margin-top: 0.04rem;
+    margin-left: 0.1rem; }
+  .input-list li.input-full input {
+    width: 95%; }
+  .input-list li.title {
+    background: none;
+    padding-left: 0;
+    margin-bottom: 0.14rem; }
+    .input-list li.title p {
+      text-align: left; }
+.input-list .red-btn, .input-list .blue-btn, .input-list .green-btn {
+  display: block;
+  width: 100%;
+  margin: 0.24rem 0 0.1rem;
+  height: 0.4rem;
+  line-height: 0.39rem;
+  border-radius: 100px; }
+
+/* 矩形按钮 红蓝 */
+.red-btn, .blue-btn, .green-btn {
+  position: relative;
+  z-index: 1;
+  color: white;
+  text-align: center; }
+
+.red-btn {
+  border-color: #ED424B;
+  background: #ED424B; }
+  .red-btn.disabled {
+    border-color: rgba(255, 0, 0, 0.2);
+    background: rgba(255, 0, 0, 0.2); }
+
+.blue-btn {
+  border-color: #2581FA;
+  background: #2581FA; }
+  .blue-btn.disabled {
+    border-color: rgba(37, 129, 250, 0.2);
+    background: rgba(37, 129, 250, 0.2); }
+
+/* 顶部切换tab */
+.tab-wrap {
+  font-size: 0;
+  height: 0.44rem;
+  border-bottom: 1px solid #E6E6E6; }
+  .tab-wrap span {
+    width: 50%;
+    height: 0.44rem;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.16rem;
+    line-height: 0.44rem;
+    text-align: center; }
+    .tab-wrap span.act {
+      color: #ED4259;
+      border-bottom: 2px solid #ED4259; }
+
+/* readX色系样式 */
+body.type-43 .red-btn {
+  border-color: #4FB53D;
+  background: #4FB53D;
+  border: 0;}
+  body.type-43 .red-btn.disabled {
+    border-color: #CEF5C7;
+    background: #CEF5C7; }
+body.type-43 .blue {
+  color: #4FB53D; }
+body.type-43 .tab-wrap span.act {
+  color: #4FB53D;
+  border-bottom: 2px solid #4FB53D; }
+body.type-41 .red-btn, body.type-36 .red-btn {
+  border-color: #FF3955;
+  background: #FF3955; }
+  body.type-41 .red-btn.disabled, body.type-36 .red-btn.disabled {
+    border-color: #ffcbd2;
+    background: #ffcbd2; }
+body.type-41 .blue, body.type-36 .blue {
+  color: #FF3955; }
+body.type-37 .red-btn {
+  border-color: #2581FA;
+  background: #2581FA; }
+  body.type-37 .red-btn.disabled {
+    border-color: rgba(37, 129, 250, 0.2);
+    background: rgba(37, 129, 250, 0.2); }
+body.type-37 .blue {
+  color: #2581FA; }
+body.type-37 .tab-wrap span.act {
+  color: #2581FA;
+  border-bottom: 2px solid #2581FA; }
+
+/* loading样式 */
+.loading {
+  text-indent: -9999em; }
+  .loading .load {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -0.08rem 0 0 -0.08rem;
+    text-indent: 9999em;
+    border-top: 0.02rem solid white;
+    border-right: 0.02rem solid white;
+    border-bottom: 0.02rem solid white;
+    border-left: 0.02rem solid transparent;
+    -webkit-animation: loading 1s infinite linear;
+    animation: loading 1s infinite linear;
+    border-radius: 50%;
+    width: 0.16rem;
+    height: 0.16rem; }
+    .loading .load:after {
+      border-radius: 50%;
+      width: 0.16rem;
+      height: 0.16rem; }
+
+/* 轻量提示 */
+.light-tip {
+  position: fixed;
+  left: 50%;
+  bottom: 0.6rem;
+  margin-left: -1.25rem;
+  text-align: center;
+  width: 2.5rem;
+  height: 0.42rem;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.85); }
+  .light-tip p {
+    color: white;
+    line-height: 0.42rem; }
+
+/* 通用弹层 */
+.common-popup-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.4); }
+  .common-popup-wrap .popup-wrap {
+    position: relative;
+    width: 3rem;
+    border-radius: 8px;
+    background: white; }
+    .common-popup-wrap .popup-wrap .icon-close {
+      position: absolute;
+      top: 0.1rem;
+      right: 0.1rem;
+      width: 0.17rem;
+      height: 0.17rem;
+      color: #A6A6A6; }
+    .common-popup-wrap .popup-wrap .content {
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: center;
+      justify-content: center;
+      padding: 0.25rem 0; }
+      .common-popup-wrap .popup-wrap .content p {
+        width: 2.36rem;
+        line-height: 0.28rem; }
+    .common-popup-wrap .popup-wrap .btn {
+      border-top: 1px solid #F0F1F2; }
+      .common-popup-wrap .popup-wrap .btn a {
+        width: 50%;
+        font-size: 0.14rem;
+        text-align: center;
+        color: #2581FA;
+        line-height: 0.4rem; }
+        .common-popup-wrap .popup-wrap .btn a:first-of-type {
+          border-right: 1px solid #F0F1F2; }
+
+.mask {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  background: rgba(0, 0, 0, 0.7);
+  filter: alpha(opacity=70); }
+
+/* 弹窗 */
+.popup-wrap {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  margin: -1.45rem 0 0 -1.45rem;
+  width: 3rem;
+  background: #FFF;
+  border-radius: 8px; }
+  .popup-wrap.popup-tip .popup-content {
+    padding: .15rem; }
+    .popup-wrap.popup-tip .popup-content h4 {
+      text-align: center;
+      font-size: 0.18rem;
+      line-height: 0.28rem; }
+    .popup-wrap.popup-tip .popup-content p {
+      font-size: 0.14rem;
+      line-height: 0.28rem; }
+  .popup-wrap.popup-tip .popup-btn {
+    text-align: center;
+    border-top: 1px solid #F0F1F2;
+    height: 0.45rem; }
+    .popup-wrap.popup-tip .popup-btn a {
+      width: 49%;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 0.14rem;
+      line-height: 0.44rem; }
+      .popup-wrap.popup-tip .popup-btn a.close {
+        color: #2581FA; }
+        .popup-wrap.popup-tip .popup-btn a.close.disabled {
+          color: #A6A6A6; }
+#resigter_code{
+  background: #4FB53D;
+  color: #fff;
+  width: 80px;
+  border-radius: 5px;
+  padding-left: 12px;
+}
+
+/*css3 loading动画*/
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+
+
+@media screen and (max-width:320px) {
+  .input-list li.code input{
+    width: 41%;
+  }
+}

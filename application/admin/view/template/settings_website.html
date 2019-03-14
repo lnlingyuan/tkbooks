@@ -1,0 +1,108 @@
+{include file="template/iframe_header" /}
+<form class="layui-form">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">网站设置</div>
+                <div class="layui-card-body" pad15="">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><span class="x-red">*</span>网站名称</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="name" lay-verify="required" value="{$data.name}" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><span class="x-red">*</span>网站域名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="domain" lay-verify="url" value="{$data.domain}" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label"><span class="x-red">*</span>首页标题</label>
+                            <div class="layui-input-block">
+                                <textarea name="title" lay-verify="required" class="layui-textarea">{$data.title}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label"><span class="x-red">*</span>META关键词</label>
+                            <div class="layui-input-block">
+                                <textarea name="keywords" lay-verify="required" class="layui-textarea" placeholder="多个关键词用英文状态 , 号分割">{$data.keywords}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label"><span class="x-red">*</span>META描述</label>
+                            <div class="layui-input-block">
+                                <textarea name="descript" lay-verify="required" class="layui-textarea">{$data.descript}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label"><span class="x-red">*</span>备案号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="record" lay-verify="required" value="{$data.record}" class="layui-input">
+                            </div>
+
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label"><span class="x-red">*</span>版权信息</label>
+                            <div class="layui-input-block">
+                                <textarea name="copyright" lay-verify="required" class="layui-textarea">{$data.copyright}</textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="add">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+
+<script>
+    layui.use(['form','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer;
+
+
+        //监听提交
+        form.on('submit(add)', function(data){
+
+            $.post('/admin.php/settings/website',data.field,function (e) {
+                if(e.code==1){
+                    //发异步，把数据提交给php000
+                    layer.alert(e.msg, {icon: 6},function () {
+                        // 获得frame索引
+                        var index =  layer.alert();
+                        //关闭当前frame
+                        layer.close(index);
+                    });
+                }else{
+                    layer.msg(e.msg);
+                }
+            });
+
+            return false;
+        });
+
+
+    });
+
+
+
+
+
+</script>
+</body>
+
+</html>

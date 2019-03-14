@@ -1,0 +1,151 @@
+{include file="template/iframe_header" /}
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">pc幻灯片</li>
+        <li>wap幻灯片</li>
+    </ul>
+
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">
+            <blockquote class="layui-elem-quote layui-quote-nm">请填入书籍的id，系统将会自动对应到相应的书籍</blockquote>
+            <form class="layui-form">
+                <div class="layui-fluid">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-body">
+                                    {volist name='$books' id='dl' key='k'}
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label2">第{$k}张幻灯片</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="books_ids[]" value="{$dl.books_id}" class="layui-input" placeholder="书籍id" lay-verify="number">
+                                        </div>
+                                        <div class="layui-form-mid layui-word-aux">
+                                            对应书籍：{$dl.books_name}
+                                        </div>
+                                    </div>
+
+                                    {/volist}
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit="" lay-filter="add">确认保存</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form >
+        </div>
+
+
+
+        <div class="layui-tab-item">
+            <form class="layui-form">
+                <div class="layui-fluid">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md12">
+                            <div class="layui-card">
+                                <div class="layui-card-body">
+
+                                    <div class="layui-form" wid100="" lay-filter="">
+                                        {volist name='$slide_wap' id='sl' key='k'}
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label2">第{$k}张幻灯片:</label>
+                                            <div class="layui-col-md12" style="padding-left: 26px;">
+                                                <input type="hidden" name="data[{$k}][image]" value="{$sl.image}">
+                                                  <img src="{$sl.image}" key="{$k}" width="200px" height="60px" class="img_slide" style="cursor:pointer">
+                                            </div>
+                                            <div class="layui-col-md6" style="padding: 10px 0px 0px 26px;">
+                                                    <input type="text" name="data[{$k}][url]" placeholder="请输入链接地址" value='{$sl.url}' autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        {/volist}
+
+
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block">
+                                                <button class="layui-btn" lay-submit="" lay-filter="slide_wap">确认保存</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+
+    layui.use(['form','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer;
+
+
+        //监听提交
+        form.on('submit(add)', function(data){
+
+            $.post('/admin.php/settings/slide',data.field,function (e) {
+                layer.msg(e.msg);
+            });
+
+            return false;
+        });
+
+        form.on('submit(slide_wap)', function(data){
+
+            $.post('/admin.php/settings/slide_wap',data.field,function (e) {
+                layer.msg(e.msg);
+            });
+
+            return false;
+        });
+
+
+    });
+
+    $(".img_slide").mouseover(function () {
+        layer.tips('点击图片可进行修改', $(this));
+    });
+
+    layui.use('upload', function(){
+        var upload = layui.upload;
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '.img_slide' //绑定元素
+            ,url: 'upload_img' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+                if(res.code=='200'){
+                 this.item.prev().val(res.res);
+                 this.item.attr("src",res.res);
+                }
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+    });
+
+</script>
+
+</body>
+
+</html>

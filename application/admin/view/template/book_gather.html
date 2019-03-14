@@ -1,0 +1,100 @@
+{include file="template/iframe_header" /}
+<div class="x-body">
+<div class="layui-col-md12">
+    <div class="layui-card">
+        <blockquote class="layui-elem-quote">点击开始采集后，采集程序将无法停止，直至采集完成！采集时将自动跳过已有书籍</blockquote>
+        <div class="layui-card-body">
+            <table class="layui-table" lay-even="" lay-skin="row">
+                <colgroup>
+                    <col width="150">
+                    <col width="200">
+                    <col width="150">
+                    <col>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>起点榜单</th>
+                    <th>采集地址</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>原创风云榜</td>
+                    <td>https://www.qidian.com/rank/yuepiao?style=1&chn=-1&page=</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-0-7">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs btn_url" url="https://www.qidian.com/rank/yuepiao?style=1&chn=-1&page=" lay-event="edit">开始采集</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>推荐票榜</td>
+                    <td>https://www.qidian.com/rank/recom?style=1&page=</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-0-7">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs btn_url" url="https://www.qidian.com/rank/recom?style=1&page=" lay-event="edit">开始采集</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>VIP收藏榜</td>
+                    <td>https://www.qidian.com/rank/vipcollect?style=1&page=</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-0-7">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs btn_url" url="https://www.qidian.com/rank/vipcollect?style=1&page=" lay-event="edit">开始采集</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>VIP精品打赏榜</td>
+                    <td>https://www.qidian.com/rank/vipreward?style=1&page=</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-0-7">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs btn_url"  url="https://www.qidian.com/rank/vipreward?style=1&page=" lay-event="edit">开始采集</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>完本榜</td>
+                    <td>https://www.qidian.com/rank/fin?style=1&page=</td>
+                    <td>
+                        <div class="layui-table-cell laytable-cell-1-0-7">
+                            <a class="layui-btn layui-btn-normal layui-btn-xs btn_url" url="https://www.qidian.com/rank/fin?style=1&page=" lay-event="edit">开始采集</a>
+                        </div>
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script>
+    $(function () {
+        $(".btn_url").click(function () {
+            var index = layer.load(2, {shade: [0.5,'#fff']});
+            var obj = $(this);
+            var obj_url = obj.attr("url");
+            $.post('/admin.php/rule/gather',{obj_url:obj_url},function (e) {
+                if(e.code==1){
+                    layer.close(index);
+                    layer.alert(e.msg);
+                    obj.parent().html('<button class="layui-btn layui-btn-xs">采集完成</button>');
+                }else{
+                    layer.alert(e.msg);
+                }
+            });
+
+        });
+    });
+</script>
+
+
+</body>
+
+</html>

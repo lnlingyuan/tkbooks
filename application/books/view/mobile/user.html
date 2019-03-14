@@ -1,0 +1,207 @@
+{include file="mobile/header" }
+<link rel="stylesheet" href="__CSS__/mobile_user.css">
+
+
+<div class="page page-center">
+	<div class="content">
+
+
+		<!-- 公用头部 S -->
+		<header id="header" class="header">
+			<a href="javascript:history.go(-1)" class="header-back jsBack">
+				<svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+			</a>
+			<h1 class="header-back-title">个人中心</h1>
+			<div class="header-operate">
+				<a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+					<svg><use xlink:href="#icon-search"></use></svg>
+				</a>
+				<a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+			</div>
+		</header>
+		{include file="mobile/more_navigation" /}
+
+		<!-- 公用头部 E -->
+
+
+
+		<!-- 页面内容 S -->
+
+
+		<div class="center-header">
+			{empty name="$info.user_img"}
+			<img src="__IMG__/timg.jpg" class="center-header-img" >
+			{else /}
+			<img src="{$info.user_img}" class="center-header-img" >
+			{/empty}
+			<p class="center-header-p">
+				<span class="user-name">{$session_name}</span><a id="modify-name" class="center-header-edit" href="javascript:" role="button">
+				<svg class="icon icon-edit"><use xlink:href="#icon-edit"></use></svg>
+			</a>
+			</p>
+		</div>
+
+
+		<div class="module module-merge">
+			<ul class="center-nav-ol center-chongzhi">
+				<li class="book-li">
+					<div class="center-rel">
+						<div class="center-btn-r book-author" style="margin-top:0px; ">
+							<a href="javascript:" class="btn-primary-small ondo_mobile">充值</a>
+						</div>
+					</div>
+					<a href="/user/account?type=0" class="book-layout">
+						<div class="book-title book-title-chongzhi"><output class="fz16">0</output><span class=" book-title-danwei">小说币 <svg class="icon icon-arrow-r fz12"><use xlink:href="#icon-arrow-r"></use></svg></span></div>
+						<!--  <span class="center-r-space"><output>0</output>小说币</span> -->
+					</a>
+				</li>
+			</ul>
+			<!-- 账号小说币
+            <a href="//pay.yuewen.com/h5/index?appId=43&areaId=2&userGuid=1258598558&returnUrl=http%3A%2F%2Fm.xs8.cn%2Fuser%3Ffrom%3Dpay" class="center-pay">
+                <i class="icon-center-pay"></i>
+                <p>去充值<svg class="icon icon-arrow-r" aria-hidden="true"><use xlink:href="#icon-arrow-r"></use></svg></p>
+            </a> -->
+		</div>
+		<div class="module module-merge">
+			<div class="cell">
+				<ul class="btn-group">
+					<li class="btn-group-cell center-acc-li" role="link">
+						<a href="javascript:" role="option">
+
+							<output>0</output>
+
+							<p>月票 <svg class="icon icon-arrow-r fz12"><use xlink:href="#icon-arrow-r"></use></svg></p>
+						</a>
+					</li>
+					<li class="btn-group-cell center-acc-li" role="link">
+						<a href="javascript:" role="option">
+
+							<output>0</output>
+
+							<p>推荐票 <svg class="icon icon-arrow-r fz12"><use xlink:href="#icon-arrow-r"></use></svg></p>
+						</a>
+					</li>
+					<li class="btn-group-cell center-acc-li" role="link">
+						<a role="option">
+
+							<output>0</output>
+							<p>限免券</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+
+
+		<nav class="module">
+			<ul class="center-nav-ol center-index-ol">
+				<li class="book-li">
+					<a href="{:url('/user/userCenter')}" class="book-layout">
+						<h3 class="book-title"><i class="icon-center-account"></i>会员中心</h3>
+						<span class="book-author">
+
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+				<li class="book-li">
+					<a href="{:url('/user/badge')}" class="book-layout">
+						<h3 class="book-title"><i class="icon-center-badge"></i>勋章</h3>
+						<span class="book-author">
+
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+				<li class="book-li">
+					<a href="{:url('/user/message')}" class="book-layout">
+						<h3 class="book-title"><i class="icon-center-exp"></i>消息中心</h3>
+						<span class="book-author">
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+
+				<li class="book-li">
+					<a href="javascript:" class="book-layout cesa" >
+						<h3 class="book-title"><i class="icon-center-safe"></i>安全中心</h3>
+						<span class="book-author">
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+				<li class="book-li">
+					<a href="javascript:" class="book-layout hece">
+						<h3 class="book-title"><i class="icon-center-help"></i>帮助中心</h3>
+						<span class="book-author">
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+				<li class="book-li">
+					<a href="javascript:" target="_blank" class="book-layout bewr">
+						<h3 class="book-title"><i class="icon-center-author"></i>成为作家</h3>
+						<span class="book-author">
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+				<li class="book-li">
+					<a href="javascript:" class="book-layout prfe">
+						<h3 class="book-title"><i class="icon-center-pro"></i>问题反馈</h3>
+						<span class="book-author">
+                    <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                </span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="module"><a id="logout" href="javascript:" class="module-bar center-logout jsDownloadLink">退出登录</a></div>
+
+		<!-- 页面内容 E -->
+	</div>
+</div>
+
+
+<script>
+	$(".cesa").click(function () {
+        layer.open({
+            content: '你的帐号很安全'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+    });
+
+    $(".hece").click(function () {
+        layer.open({
+            content: '没人会帮你的'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+    });
+
+    $(".bewr").click(function () {
+        layer.open({
+            content: '就你？？？？'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+    });
+
+    $(".prfe").click(function () {
+        layer.open({
+            content: '网站很完美，没有任何问题'
+            ,btn: ['有一点瑕疵', '完美']
+            ,skin: 'footer'
+            ,yes: function(index){
+                layer.open({content: '现 在 完 美 了'})
+            }
+        });
+    });
+
+</script>
+{include file="mobile/footer" /}

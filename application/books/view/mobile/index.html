@@ -1,0 +1,240 @@
+{include file="mobile/header" /}
+
+<!-- SVG图标 E -->
+<div class="page page-home login">
+<div class="content">
+	<header id="header" class="header header-index"><a href="/" class="logo-a">
+	<h1 class="logo"></h1>
+	</a>
+	<div class="header-operate red">
+		<a id="aUserCenter" href="javascript:" class="icon icon-person" title="个人设置">
+			<svg class="jsGuestWrapper" hidden="" style="display: none;"><use xlink:href="#icon-person"></use></svg><img id="avatar" class="header-avatar jsUserWrapper" src="__IMG__/timg.jpg" alt="" style=""></a>
+		<a href="javascript:" class="icon icon-book openshelf" id="openGuide" title="我的书架"><svg><use xlink:href="#icon-book"></use></svg></a>
+	</div>
+	</header>
+	<!-- 页面内容 S -->
+
+
+
+
+	<!-- 幻灯片star -->
+	<link rel="stylesheet" href="__CSS__/mobile_index.css">
+	<script type="text/javascript" src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+	<div id="slideBox" class="slideBox">
+		<div class="hd">
+			<ul>
+				<li class="on"></li><li class=""></li><li class=""></li><li class=""></li></ul>
+		</div>
+		<div class="bd">
+			<ul>
+				{volist name='$data' id='vo'}
+				<li><a href="{$vo.url}" target="_blank"><img src="{$vo.image}" /></a></li>
+				{/volist}
+			</ul>
+		</div>
+
+
+	</div>
+
+	<script type="text/javascript">
+        jQuery(".slideBox").slide({mainCell:".bd ul",effect:"left",autoPlay:true});
+	</script>
+
+
+
+
+
+	<!-- 幻灯片end -->
+
+
+	<!-- 首页广告位 E --><!-- 搜书 S -->
+	<div id="searchContainer">
+		<a id="openSearchPopup" href="javascript:" class="search-guide" data-keyword=""><svg class="icon icon-find"><use xlink:href="#icon-find"></use></svg>道君</a>
+	</div>
+
+	<nav class="home-nav">
+		<a href="{:url('/bibliotheca/mobileIndex')}" class="guide-nav-a"><i class="icon icon-sort"></i><h4 class="guide-nav-h">分类</h4></a>
+		<a href="{:url('/rankinglist/index')}" class="guide-nav-a"><i class="icon icon-rank"></i><h4 class="guide-nav-h">排行榜</h4></a>
+		<a href="{:url('/index/copyright')}" class="guide-nav-a"><i class="icon icon-fuli"></i><h4 class="guide-nav-h">版权</h4></a>
+		<a href="javascript:" class="guide-nav-a ondo_mobile"><i class="icon icon-newbook"></i><h4 class="guide-nav-h">新书</h4></a>
+		<a href="javascript:" class="guide-nav-a ondo_mobile"><i class="icon icon-finishbook"></i><h4 class="guide-nav-h">完本</h4></a>
+	</nav>
+	<!-- 搜书 E --><!-- 热门小说 S -->
+	<div class="module">
+		<!-- 模块标题 -->
+		<div class="module-header">
+			<div class="module-header-l">
+				<h3 class="module-title"><svg class="icon icon-mhot"><use xlink:href="#icon-mhot"></use></svg>热门小说</h3>
+			</div>
+		</div>
+		<!-- 侧滑 -->
+		<div class="module-wrapper">
+			<ol class="book-ol book-ol-normal book-ol-top">
+				<li class="book-li">
+					<a href="{:url('/cover/index',['books_id'=>$all.10.books_id])}" class="book-layout"><img src="__BOOKSIMG__/{$all.10.books_img}" class="book-cover" alt="">
+				<div class="book-cell">
+					<h4 class="book-title">{$all.10.books_name}</h4>
+					<p class="book-desc">
+						{$all.10.books_synopsis}
+					</p>
+					<div class="book-meta">
+						<div class="book-meta-l">
+							<span class="book-author book-author-gray">{$all.10.books_author}</span>
+						</div>
+						<div class="book-meta-r">
+							<span class="tag-small-group origin-right"><em class="tag-small lightgreen">{$types[$all.10.books_type]}</em><em class="tag-small lightblue">  {eq name="$all.10.books_status" value="0"}连载中{else/}完结{/eq}</em><em class="tag-small smallblue">123.12万</em></span>
+						</div>
+					</div>
+				</div>
+				</a></li>
+			</ol>
+			<ol class="book-ol book-ol-normal book-ol-small">
+				{volist name="all" id="vo" offset="26" length='4'  key="k" }
+				<li class="book-li"><a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="book-layout">
+					<img src="__BOOKSIMG__/{$vo.books_img}" class="book-cover" >
+				<div class="book-cell">
+					<h5 class="module-slide-caption small-book-title">{$vo.books_name}</h5>
+					<div class="book-meta">
+						<div class="book-meta-l">
+							<span class="book-author small-book-author">{$vo.books_author}</span>
+						</div>
+					</div>
+				</div>
+				</a></li>
+				{/volist}
+
+			</ol>
+		</div>
+	</div>
+	<!-- 热门小说 E --><!-- 一品红文 S -->
+	<div class="module">
+		<!-- 模块标题 -->
+		<div class="module">
+			<!-- 模块标题 -->
+			<div class="module-header module-header-none">
+				<div class="module-header-l">
+					<h3 class="module-title"><svg class="icon icon-mwen"><use xlink:href="#icon-mwen"></use></svg>一品红文</h3>
+				</div>
+				<div class="module-header-r">
+
+				</div>
+			</div>
+			<span class="module-header-tips">每日甄选精品好文</span><!-- 书介绍list -->
+			<ol class="book-ol book-ol-normal">
+				{volist name="all" id="vo" offset="34" length='4'  key="k" }
+				<li class="book-li"><a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="book-layout">
+					<img src="__BOOKSIMG__/{$vo.books_img}" class="book-cover" alt="嫁给首长那些事儿">
+				<div class="book-cell">
+					<h4 class="book-title">{$vo.books_name}</h4>
+					<p class="book-desc">
+						{$all.10.books_synopsis}
+					</p>
+					<div class="book-meta">
+						<div class="book-meta-l">
+							<span class="book-author book-author-gray">{$vo.books_author}</span>
+						</div>
+						<div class="book-meta-r">
+							<span class="tag-small-group origin-right"><em class="tag-small lightgreen">{$types[$vo.books_type]}</em><em class="tag-small lightblue">{eq name="$vo.books_status" value="0"}连载中{else/}完结{/eq}</em><em class="tag-small smallblue">99.34万</em></span>
+						</div>
+					</div>
+				</div>
+				</a></li>
+				{/volist}
+			</ol>
+		</div>
+	</div>
+	<!-- 一品红文 E --><!-- 主编推荐 S -->
+	<div class="module" data-l1="5">
+		<!-- 模块标题 -->
+		<div class="module-header module-header-none">
+			<div class="module-header-l">
+				<h3 class="module-title"><svg class="icon icon-mtui"><use xlink:href="#icon-mtui"></use></svg>主编推荐</h3>
+			</div>
+			<div class="module-header-r">
+			</div>
+		</div>
+		<!-- 侧滑 -->
+		<div class="module-slide">
+			<ol class="module-slide-ol module-slide-ol-flex" role="listbox" title="水平列表，可以水平滚动">
+				{volist name="all" id="vo" offset="88" length='4'  key="k" }
+				<li class="module-slide-li">
+					<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="module-slide-a">
+						<img src="__BOOKSIMG__/{$vo.books_img}" class="module-slide-img"
+						><figcaption class="module-slide-caption">{$vo.books_name}</figcaption>
+				<p class="module-slide-author">
+					<span class="clip">作者：</span><span class="gray">{$vo.books_author}</span>
+				</p>
+				</a></li>
+				{/volist}
+			</ol>
+		</div>
+	</div>
+	<!-- 主编推荐 E --><!-- 排行榜 S -->
+	<div class="module" data-l1="5">
+		<!-- 模块标题 -->
+		<div class="module-header module-header-none">
+			<div class="module-header-l">
+				<h3 class="module-title"><svg class="icon icon-mrank"><use xlink:href="#icon-mrank"></use></svg>排行榜</h3>
+			</div>
+			<div class="module-header-r">
+			</div>
+		</div>
+		<!-- 侧滑 -->
+		<div class="module-slide">
+			<div class="module-rank-top">
+				<span class="module-rank-line"></span><span class="module-rank-text"></span>
+			</div>
+			<ol class="module-slide-ol module-slide-ol-flex" role="listbox" title="水平列表，可以水平滚动">
+				{volist name="all" id="vo" offset="12" length='4'  key="k" }
+				<li class="module-slide-li">
+					<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="module-slide-a">
+						<img src="__BOOKSIMG__/{$vo.books_img}" class="module-slide-img" >
+						<figcaption class="module-slide-caption">{$vo.books_name}</figcaption>
+				<p class="module-slide-author">
+					<span class="clip">作者：</span><span class="gray">{$vo.books_author}</span>
+				</p>
+				</a></li>
+				{/volist}
+
+			</ol>
+			<div class="module-rank-top">
+				<span class="module-rank-line"></span><span class="module-rank-text module-rank-text-new"></span>
+			</div>
+			<ol class="module-slide-ol module-slide-ol-flex" role="listbox" title="水平列表，可以水平滚动">
+				{volist name="all" id="vo" offset="96" length='4'  key="k" }
+				<li class="module-slide-li">
+					<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="module-slide-a">
+						<img src="__BOOKSIMG__/{$vo.books_img}" class="module-slide-img" >
+						<figcaption class="module-slide-caption">{$vo.books_name}</figcaption>
+						<p class="module-slide-author">
+							<span class="clip">作者：</span><span class="gray">{$vo.books_author}</span>
+						</p>
+					</a></li>
+				{/volist}
+			</ol>
+		</div>
+	</div>
+	<!-- 排行榜 E --><!-- 免费读书 S -->
+</div>
+</div>
+<script>
+	$("#aUserCenter").click(function () {
+		$.post("/user/login",'',function (e) {
+			if(e.code==0){
+                //询问框
+                layer.open({
+                    content: e.msg
+                    ,btn: ['登陆', '就不']
+                    ,yes: function(index){
+                        window.location.href=e.url;
+                        layer.close(index);
+                    }
+                });
+			}else{
+                window.location.href=e.url;
+			}
+        });
+    });
+</script>
+
+{include file="mobile/footer" /}

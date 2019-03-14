@@ -1,0 +1,204 @@
+<!-- 左侧菜单开始 -->
+<div class="left-nav">
+    <div id="side-nav">
+        <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6b8;</i>
+                    <cite>角色管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{:url('/user/index')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">网站用户</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{:url('/user/adminList')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>后台管理员</cite>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe705;</i>
+                    <cite>小说管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{:url('/books/add')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">添加小说</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{:url('/books/booksList')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">小说列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon">&#xe63c;</i>
+                    <cite>文章管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{:url('/article/articleList')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">站点文章</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon">&#xe663;</i>
+                    <cite>分类管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{:url('/type/index')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">小说分类</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon">&#xe628;</i>
+                    <cite>采集管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="{:url('/rule/index')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">规则管理</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="{:url('/rule/bookGather')}">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite class="power">小说采集</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-set"></i>
+                    <cite>设置</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="javascript:;">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>首页设置</cite>
+                        </a>
+                        <ul class="sub-menu" >
+                        <li>
+                            <a _href="{:url('/Settings/slide')}">
+                                <i class="iconfont"></i>
+                                <cite>幻灯片设置</cite>
+                            </a>
+                        </li>
+
+                    </ul>
+                        <ul class="sub-menu" >
+                            <li>
+                                <a _href="{:url('/Settings/homeCache')}">
+                                    <i class="iconfont"></i>
+                                    <cite>首页静态化</cite>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li >
+                    <li>
+                        <a _href="javascript:;">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>seo设置</cite>
+                        </a>
+                        <ul class="sub-menu" >
+                            <li>
+                                <a _href="{:url('/Settings/seolist')}">
+                                    <i class="iconfont"></i>
+                                    <cite>seo管理</cite>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li >
+                    <li>
+                        <a _href="javascript:;">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>系统设置</cite>
+                        </a>
+                        <ul class="sub-menu" >
+                            <li>
+                                <a _href="{:url('/Settings/website')}">
+                                    <i class="iconfont"></i>
+                                    <cite>网站设置</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="{:url('/Settings/mail')}">
+                                    <i class="iconfont"></i>
+                                    <cite>邮件服务</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="{:url('/Settings/changyan')}">
+                                    <i class="iconfont"></i>
+                                    <cite>畅言接入</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li >
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<script>
+    $(function () {
+        var admin = "{$admin_id}";
+            if(admin!='1'){
+                    $("cite").each(function(){
+                        var arr_data = {$arr};
+                        var e = arr_data.indexOf($(this).text());
+                        if(e=='-1'){
+                            $(this).parent().parent().remove();
+                        }
+                    });
+            }
+
+        var meun = new Array()
+        $("cite").each(function(e,i){
+            var name = $(this).text();
+
+            meun[e] = name;
+
+        });
+       var  meunjson = JSON.stringify(meun);
+
+       //缓存栏目
+       $.post('meun',{meunjson:meunjson},function (e) {
+       });
+    });
+</script>
+<!-- 左侧菜单结束 -->

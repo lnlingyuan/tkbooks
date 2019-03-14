@@ -1,0 +1,76 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+            <input type="hidden" value="{$books_id}" name="books_id">
+            <input type="hidden" value="edit" name="action">
+            <input type="hidden" value="{$has}" name="has">
+          <div class="layui-form-item">
+              <label for="L_chapter_name" class="layui-form-label">
+                  <span class="x-red">*</span>章节名称
+              </label>
+              <div class="layui-col-md4">
+                  <input type="text" id="L_chapter_name" name="chapter_name" required="章节名称不能为空"  value="{$chapter_name}" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+
+            <div class="layui-form-item">
+                <label for="L_chapter_url" class="layui-form-label">
+                    <span class="x-red">*</span>源地址
+                </label>
+                <div class="layui-col-md4">
+                    <input type="text"  name="chapter_url" required="源地址不能为空"  value="{$chapter_url}" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+
+
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+
+        //自定义验证规则
+
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/books/books_chapter',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert(e.msg, {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+
+
+      });
+
+
+
+
+  </script>
+
+  </body>
+
+</html>

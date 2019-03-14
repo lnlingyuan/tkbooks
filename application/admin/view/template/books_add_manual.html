@@ -1,0 +1,174 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red"></span>书籍封面
+                </label>
+                <div class="layui-input-inline ">
+                    <span class="file_photo"></span>
+                    <p>
+                        <button type="button" class="layui-btn" id="test1">
+                            <i class="layui-icon"></i>上传封面
+                        </button>
+                        <input class="layui-upload-file" type="file" accept="undefined" >
+                        <input  type="hidden"  name="books_img" value="" >
+                    </p>
+                </div>
+
+            </div>
+          <div class="layui-form-item">
+              <label for="L_username" class="layui-form-label">
+                  <span class="x-red">*</span>书籍名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_username" name="books_name" required="书籍名不能为空" lay-verify="nikename" autocomplete="off" class="layui-input" value="" >
+              </div>
+
+
+          </div>
+
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>作者
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_email" name="books_author" required="作者不能为空"  value=""
+                         autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>更新时间
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_time" name="books_time" required="更新时间不能为空"  value=""
+                           autocomplete="off" class="layui-input" placeholder="更新时间" name="L_time">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>书籍类型
+                </label>
+                <div class="layui-input-inline">
+                    <select name="books_type" >
+                        <!--<option value="">{empty name='$res.books_type' }请选择类型{else /}{$types[$res.books_type]}{/empty}</option>-->
+                        <option value="">请选择类型</option>
+                        {volist name="$type" id="vo"}
+                        <option value="{$vo.type_id}" >{$vo.type_name}</option>
+                        {/volist}
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>更新状态
+                </label>
+                <div class="layui-input-block">
+                    <input type="radio" name="books_status" value="0" title="更新" checked>
+                    <input type="radio" name="books_status" value="1" title="完结" >
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>书籍简介
+                </label>
+                <div class="layui-input-inline">
+                    <textarea name="books_synopsis" required="书籍简介不能为空"  placeholder="请输入内容" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red">*</span>源地址
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text"  name="books_url" required="源地址不能为空"  value=""
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#L_time' //指定元素
+            });
+
+        });
+
+        layui.use('upload', function(){
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#test1' //绑定元素
+                ,url: 'upload_photo' //上传接口
+                ,done: function(res){
+                    //上传完毕回调
+                    if(res.code=='200'){
+                        var html = '<img src="'+res.res+'" style="width: 112px;margin-bottom: 10px;" />';
+                        $(".file_photo").html(html);
+
+                        $("input[name='books_img']").val(res.res);
+                    }
+                }
+                ,error: function(){
+                    //请求异常回调
+                }
+            });
+        });
+
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+
+        //自定义验证规则
+
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/books/appendBooks',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert("添加成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+
+
+      });
+
+       $("#portrait").click(function () {
+          $("input[name='user_img']").click();
+
+       });
+
+
+  </script>
+
+  </body>
+
+</html>

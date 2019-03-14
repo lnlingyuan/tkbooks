@@ -1,0 +1,261 @@
+/*
+Icon classes can be used entirely standalone. They are named after their original file names.
+
+Example usage in HTML:
+
+`display: block` sprite:
+<div class="icon-home"></div>
+
+To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+
+// CSS
+.icon {
+  display: inline-block;
+}
+
+// HTML
+<i class="icon icon-home"></i>
+*/
+
+.icon-account {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: 0px -47px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-booklist-full {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -204px -27px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-checkin-gift {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: 0px 0px;
+  width: 50px;
+  height: 43px;
+}
+
+.icon-chongzeng {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -108px -147px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-end {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -144px -147px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-erymission {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -36px -147px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-fans {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -54px -50px;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-finishbook {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -154px 0px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-free {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -172px -147px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-fuli {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -100px -97px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-gift {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -154px -90px;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-home {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -50px -97px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-newbook {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: 0px -97px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-newuser {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: 0px -147px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-pay-like {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -154px -50px;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-pay-month {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -104px -50px;
+  width: 36px;
+  height: 36px;
+}
+
+.icon-pay-pay {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -204px 0px;
+  width: 23px;
+  height: 23px;
+}
+
+.icon-qiandao {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -72px -147px;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-rank {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -104px 0px;
+  width: 46px;
+  height: 46px;
+}
+
+.icon-sort {
+  background-image: url("/xs8m/icon/common/sprite-87edc55a9f.png");
+  background-position: -54px 0px;
+  width: 46px;
+  height: 46px;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+  .icon-account {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-booklist-full {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-checkin-gift {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-chongzeng {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-end {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-erymission {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-fans {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-finishbook {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-free {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-fuli {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-gift {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-home {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-newbook {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-newuser {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-pay-like {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-pay-month {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-pay-pay {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-qiandao {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-rank {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+
+  .icon-sort {
+    background-image: url("../images/sprite.png");
+    background-size: 227px 179px;
+  }
+}

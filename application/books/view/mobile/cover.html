@@ -1,0 +1,199 @@
+{include file="mobile/header" /}
+
+    <!-- SVG图标 E -->
+
+    
+        <div class="page page-book-detail">
+            <div class="content">
+                
+                    
+   <!-- 公用头部 S -->
+   <header id="header" class="header">
+    <a href="javascript:history.go(-1)" class="header-back jsBack">
+        <svg  class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+    </a>
+        <h1 class="header-back-title">{$data.books_name}</h1>
+            <div class="header-operate">
+                <a id="openSearchPopup" href="#" class="icon icon-search" title="搜索"><svg><use xlink:href="#icon-search"></use></svg> </a>
+                 <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+            </div>
+                            
+     </header>
+{include file="mobile/more_navigation" /}
+                        
+
+
+                <!-- 页面内容 S -->
+                
+ <!-- 书大致介绍 -->
+            <div id="bookDetailWrapper" class="module module-merge book-detail-x" data-book-id="9957174303982103" data-chan-id="30020" data-author-id="9691575703438401" data-user-level="" data-book-type="" data-login-status="true">
+                <img src="__BOOKSIMG__/{$data.books_img}" class="book-cover-blur" >
+                <div class="book-detail-info">
+                    <div class="book-layout">
+                        <img src="__BOOKSIMG__/{$data.books_img}" class="book-cover" >
+                        <div class="book-cell">
+                            <h2 class="book-title book-detail-title">{$data.books_name}</h2>
+                            <div class="book-rand-a"><a href="#">{$data.books_author}</a></div>
+                            <p class="book-meta">{$types[$data.books_type]}<span class="char-pipe">/</span>{$data.books_time}</p>
+                            <p class="book-meta">72.04万字<span class="char-pipe">|</span>{$data.books_status}</p>
+                            <p class="book-meta">
+                                <span class="tag-small-group origin-left">
+                                    
+                                    
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="book-detail-btn" data-read-status="" data-bookshelf-status="">
+                        <ul class="btn-group">
+
+
+                            {empty name="$history_url"}
+                            <li class="btn-group-cell"><a href="{:url('/catalog/index',['books_id'=>$books_id])}" class="btn-normal lightgreen" id="btnReadBook">开始阅读</a></li>
+                            {else /}
+                            <li class="btn-group-cell"><a href="{:url('/info/index',['books_id'=>$books_id,'chapter_url'=>$history_url])}" class="btn-normal lightgreen" id="btnReadBook">继续阅读</a></li>
+                            {/empty}
+                            
+                            <!--<li class="btn-group-cell"><a href="#" id="myCart" class="btn-normal white">VIP订阅</a></li>-->
+                            {if condition="($books_has == 1)"}
+                            <li class="btn-group-cell"><a href="#" class="btn-normal white"  data-bookshelf-status="1">已在书架</a></li>
+                            {else /}
+                            <li class="btn-group-cell"><a href="#" class="btn-normal white" id="btnAddToBookshelf" data-bookshelf-status="1">加入书架</a></li>
+                            {/if}
+                            <li class="btn-group-cell"><a href="#" class="btn-normal white " id="btnAddToBooklist" data-bookshelf-status="">加书单</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="module module-merge">
+                <!-- 书籍摘要 -->
+                <section id="bookSummary" class="book-summary enabled">
+
+                    <content>{$data.books_synopsis}</content>
+                    <span class="book-summary-more">
+                        <svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+                    </span>
+                </section>
+                <a href="{:url('/catalog/index',['books_id'=>$books_id])}" class="book-meta book-status">
+                    <div class="book-meta-l">
+                        <strong class="book-spt">目录</strong>
+                    </div>
+                    <div class="book-meta-r">
+                       <p class="gray ell"></p>
+                        <svg class="icon icon-arrow-r"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-arrow-r"></use></svg>
+                    </div>
+                </a>
+            </div>
+
+
+
+
+            <!-- 书评区 -->
+            <div class="module trigger-book-comment" id="book-commnet-container" data-load-status="loading">
+                <div class="module-header">
+                    <div class="module-header-l">
+                        <h3 class="module-title">书评区</h3><span class="module-title-desc"><output>
+                    </div>
+                    <div class="module-header-r">
+                        <a href="#" class="elCommentBtn module-title-desc mr10"> </a>
+                    </div>
+                </div>
+                <div class="module-content elIconGoodWrap">
+
+                    <!--WAP版-->
+                    <div id="SOHUCS" sid="{$books_id}" ></div>
+                    <script id="changyan_mobile_js" charset="utf-8" type="text/javascript"
+                            src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id={$changyan.appid}&conf={$changyan.conf}">
+                    </script>
+
+
+
+                    <a href="#" class="book-li-more book-li-more-comments">更多书评</a>
+                    <a href="#" class="elCommentBtn book-li-more book-li-write-comment" style="display:none">写书评,抢沙发</a>
+                </div>
+            </div>
+
+             
+            
+            <!-- 同类推荐 -->
+            <div class="module" data-load-status="wait">
+                <div class="module-header">
+                    <div class="module-header-l">
+                        <h3 class="module-title">强力推荐榜</h3>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <!-- 侧滑 -->
+                    <div class="module-slide">
+                        <ol class="module-slide-ol" id="book-friend-list-container" role="listbox" title="水平列表，可以水平滚动">
+
+
+            {volist name='res' id='vo' offset='10' length='10' key='key' }
+                <li class="module-slide-li">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="module-slide-a">
+                        <img src="__BOOKSIMG__/{$vo.books_img}" style="width: 66px;height: 88px;">
+                        <figcaption class="module-slide-caption">{$vo.books_name}</figcaption>
+                        <p class="module-slide-author">{$vo.books_author}</p>
+                    </a>
+                </li>
+            {/volist}
+
+
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="module">
+                <div class="module-header">
+                    <div class="module-header-l">
+                        <h3 class="module-title">版权信息</h3>
+                    </div>
+                </div>
+                <div class="module-content">
+                    <div class="book-copyright">
+                    <p>版权:{$module_data.name}</p>
+                    <p>声明:本站内容是网站根据您的指令搜索各大小说站得到的链接列表，不代表{$module_data.name}网赞成被搜索网站的内容或立场
+                        如果版权人认为在本站放置您的作品有损您的利益，请联系我们，本站确认后将会立即删除</p>
+                    </div>
+                </div>
+            </div>
+
+
+                
+            </div>
+        </div>
+
+<script>
+    //加入书架
+    $("#btnAddToBookshelf").click(function () {
+        var i = $(".addbksj").hasClass('yiadd');
+
+        if(i==false){
+
+            var books_id ="{$books_id}";
+            $.post("/cover/addShelf",{books_id:books_id},function (data) {
+                console.log(data);
+                if(data.code=='200'){
+                    $("#btnAddToBookshelf").text('已在书架');
+                }
+                //提示
+                layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+
+            },"json");
+
+        }
+
+    });
+
+
+</script>
+
+    {include file="mobile/footer" /}

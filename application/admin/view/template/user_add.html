@@ -1,0 +1,139 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <label for="L_email" class="layui-form-label">
+                    <span class="x-red"></span>用户头像
+                </label>
+
+                <div class="layui-input-inline">
+                    <span class="file_photo" ></span>
+                    <p>
+                        <button type="button" class="layui-btn" id="test1">
+                            <i class="layui-icon"></i>上传头像
+                        </button>
+                        <input class="layui-upload-file" type="file" accept="undefined" >
+                        <input  type="hidden"  name="user_img" value="" >
+                    </p>
+
+                </div>
+
+
+            </div>
+          <div class="layui-form-item">
+              <label for="L_username" class="layui-form-label">
+                  <span class="x-red">*</span>用户名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_username" name="user_name" required="" lay-verify="nikename" autocomplete="off" class="layui-input" value="" >
+              </div>
+
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_password" class="layui-form-label">
+                  <span class="x-red">*</span>密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_pwd" name="user_password" required="" lay-verify="required" value=""
+                         autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>邮箱
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_email" name="user_email" required="" lay-verify="email" value=""
+                         autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_status" class="layui-form-label">
+                    <span class="x-red">*</span>状态
+                </label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_disable" value="0" title="启用" checked >
+                    <input type="radio" name="is_disable" value="1" title="禁用" >
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 2) {
+                    return '昵称至少得2个字符啊';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/user/addUser',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert("新增成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+      layui.use('upload', function(){
+          var upload = layui.upload;
+
+          //执行实例
+          var uploadInst = upload.render({
+              elem: '#test1' //绑定元素
+              ,url: '/admin.php/user/upload_photo' //上传接口
+              ,done: function(res){
+                  //上传完毕回调
+                  if(res.code=='200'){
+                      var html = '<img src="'+res.res+'" style="width: 130px;margin-bottom: 10px;" />';
+                      $(".file_photo").html(html);
+
+                      $("input[name='user_img']").val(res.res);
+                  }
+              }
+              ,error: function(){
+                  //请求异常回调
+              }
+          });
+      });
+
+
+  </script>
+
+  </body>
+
+</html>

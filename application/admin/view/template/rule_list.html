@@ -1,0 +1,112 @@
+{include file="template/iframe_header" /}
+<div class="x-body">
+    <div class="layui-row">
+        <blockquote class="layui-elem-quote">如果选中了可搜索，则可以在 <em>小说管理</em> -> <em>添加小说</em> 中的源地址出现</blockquote>
+    </div>
+    <xblock>
+        <button class="layui-btn" onclick='x_admin_show("添加规则","{:url(\'rule/add'\)}")'><i class="layui-icon"></i>添加</button>
+    </xblock>
+
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>采集网址</th>
+            <th>采集地址</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+
+        {volist name='$data' id='vo' }
+        <tr>
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{$vo.rule_id}'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{$vo.rule_id}</td>
+            <td class="type_name">{$vo.rule_name}</td>
+            <td>{$vo.host}</td>
+
+            <td class="td-manage">
+                <a title="编辑"  onclick="x_admin_show('编辑','{:url(\'rule/edit'\,[\'rule_id'\=>$vo.rule_id])}')" href="javascript:;">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'{$vo.rule_id}')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+{/volist}
+        </tbody>
+    </table>
+
+{notempty name='$res'}
+    <fieldset class="layui-elem-field">
+        <legend>等待添加的采集规则</legend>
+        <div class="layui-field-box">
+            <table class="layui-table" lay-skin="line">
+                <tbody>
+                <tr>
+                    <td >
+                        书库中存中从以下源地址抓取的的书籍，但却没有匹配的采集规则，请尽快添加相应规则，避免阅读时出错
+                    </td>
+                </tr>
+                {volist name='$res' id='vo' }
+                <tr>
+                    <td >
+                        <a class="x-a" href="http://{$vo}" target="_blank">{$vo}</a>
+                    </td>
+                </tr>
+                {/volist}
+
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+{/notempty}
+</div>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+
+
+
+    /*用户-删除*/
+    function member_del(obj,rule_id){
+        layer.confirm('确认要删除吗？',function(index){
+
+            $.post('delete',{rule_id:rule_id},function (e) {
+                if(e.code==1) {
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }else{
+                    layer.msg('删除失败!',{icon:2,time:1000});
+                }
+            });
+
+
+        });
+    }
+
+
+    
+
+    
+</script>
+
+</body>
+
+</html>

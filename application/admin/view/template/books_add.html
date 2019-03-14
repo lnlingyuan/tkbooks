@@ -1,0 +1,146 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+      <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so layui-form-pane" action="{:url('/books/add')}" method="post"  >
+          <input class="layui-input" placeholder="书籍名或作者名称" name="books_name" required="书籍名或作者名称不能为空" value="{$books_name}" style="width:50%">
+          <div class="layui-inline">
+            <select name="rule_id" required="书籍名或作者名称不能为空" >
+              {volist name="rule_list" id="vo"}
+              <option value="{$vo.rule_id}" {if condition="$rule_id eq $vo.rule_id" }selected{/if} >{$vo.rule_name}</option>
+              {/volist}
+            </select>
+
+          </div>
+          <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon"></i></button>
+        </form>
+      </div>
+      <blockquote class="layui-elem-quote">如果搜索不到想要小说，可移步到小说中列表中手动添加小说</blockquote>
+
+      <table class="layui-table">
+        <thead>
+          <tr>
+            <th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>书籍名</th>
+            <th>链接</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+
+        {present name="$result"}
+        {volist  name="$result" id="vo"}
+          <tr>
+            <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{$vo.name}</td>
+            <td><a href="{$vo.href}" target="_blank">{$vo.href}</a></td>
+            <td class="td-manage">
+              <button class="layui-btn layui-btn layui-btn-xs jkbooks" name="{$vo.name}" rule_id="{$rule_id}" href="{$vo.href}"  ><i class="layui-icon"></i>添加入库</button>
+            </td>
+          </tr>
+        {/volist}
+        {/present}
+
+        </tbody>
+      </table>
+
+
+    </div>
+    <script>
+      layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+          elem: '#end' //指定元素
+        });
+      });
+
+       /*用户-停用*/
+      function member_stop(obj,id){
+          layer.confirm('确认要停用吗？',function(index){
+
+              if($(obj).attr('title')=='启用'){
+
+                //发异步把用户状态进行更改
+                $(obj).attr('title','停用')
+                $(obj).find('i').html('&#xe62f;');
+
+                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                layer.msg('已停用!',{icon: 5,time:1000});
+
+              }else{
+                $(obj).attr('title','启用')
+                $(obj).find('i').html('&#xe601;');
+
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                layer.msg('已启用!',{icon: 5,time:1000});
+              }
+              
+          });
+      }
+
+      /*用户-删除*/
+      function member_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+          });
+      }
+
+
+
+      function delAll (argument) {
+
+        var data = tableCheck.getData();
+  
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+      }
+
+      //小说入库
+      $(".jkbooks").click(function () {
+
+          //调用
+          loading("小说入库中，请稍等！");
+
+          var href = $(this).attr('href');
+          var name = $(this).attr('name');
+          var rule_id = $(this).attr('rule_id');
+
+          $.post('Warehousing',{href:href,name:name,rule_id:rule_id},function (e) {
+              layer.msg(e.msg);
+          });
+      });
+
+      //加载层
+      function loading(msg) {
+          layer.msg(msg, {
+              icon: 16,
+              shade: [0.1, '#fff'],
+              time: false  //取消自动关闭
+          })
+      }
+
+
+
+    </script>
+
+
+
+
+  </body>
+
+</html>

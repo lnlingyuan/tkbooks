@@ -1,0 +1,103 @@
+{include file="template/iframe_header" /}
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">邮件服务</div>
+                <div class="layui-card-body">
+
+                    <div class="layui-form" wid100="" lay-filter="">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">SMTP服务器</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="smtp_server" lay-verify="required" value="{$data.smtp_server}" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">如：smtp.163.com</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">SMTP端口号</label>
+                            <div class="layui-input-inline" style="width: 80px;">
+                                <input type="text" name="smtp_number" lay-verify="number|required" value="{$data.smtp_number}" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">一般为 25 或 465</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">发件人邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="send_email" value="{$data.send_email}" lay-verify="email" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">发件人昵称</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="send_nickname" lay-verify="required" value="{$data.send_nickname}" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">邮箱登入名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="send_username" lay-verify="required" value="{$data.send_username}" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label2">邮箱登入密码</label>
+                            <div class="layui-input-inline">
+                                <input type="password" name="send_password"  lay-verify="pwd" value="{$data.send_password}" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">登入密码或是授权码</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="add">确认保存</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    layui.use(['form','layer'], function(){
+        $ = layui.jquery;
+        var form = layui.form
+            ,layer = layui.layer;
+
+
+        //监听提交
+        form.on('submit(add)', function(data){
+
+            $.post('/admin.php/settings/mail',data.field,function (e) {
+                if(e.code==1){
+                    //发异步，把数据提交给php000
+                    layer.alert(e.msg, {icon: 6},function () {
+                        // 获得frame索引
+                        var index =  layer.alert();
+                        //关闭当前frame
+                        layer.close(index);
+                    });
+                }else{
+                    layer.msg(e.msg);
+                }
+            });
+
+            return false;
+        });
+
+
+    });
+
+
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

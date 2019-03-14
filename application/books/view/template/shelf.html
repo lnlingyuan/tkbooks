@@ -1,0 +1,70 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+
+<div class="mybkshelf">
+    <div class="shelftop">
+        <h2>我的书架</h2>
+        <div class="shelbtn hide">
+            <input class="tuwen" type="button"><input class="wenbtn" type="button">
+        </div>
+    </div>
+</div>
+
+<div class="content" id="shelfbox" lmk="bookshelf" lmv="展示区">
+
+
+    {if condition="$has eq false"}
+    <ul class="shelful clearfix">
+        {volist name="data" id="vo"}
+        <li class="">
+            <div class="shelfimg">
+                <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" width="120"></div>
+            <div class="sinfobox">
+                <h3>{$vo.books_name}</h3>
+                <p>作者：{$vo.books_author}</p>
+
+                <p >类型：{$types[$vo.books_type]}</p>
+
+
+                <p >阅读至：{empty name="$vo.history_name"} 暂未阅读{else /}{$vo.history_name}{/empty}</p>
+
+                <div class="shelfbtnbox">
+
+                    <a  class="shelread" target="_blank" href="{:url('/cover/index',['books_id'=>$vo.books_id])}">阅读</a>
+
+                    <a  class="visib" books_id="{$vo.books_id}" href="javascript:;">删除本书</a>
+                </div>
+
+            </div>
+        </li>
+        {/volist}
+    </ul>
+    {else /}
+    <p style="text-align: center;padding: 40px;color: #f36f20;font-size: 18px;">您的书架还没有书哟</p>
+        {/if}
+
+
+
+</div>
+
+<div class="paging fenye">
+    {$data->render()}
+
+</div>
+
+<script>
+    //删除书籍
+    $(".visib").click(function () {
+        var books_id = $(this).attr('books_id');
+        $.post('/shelf/deleteBooks',{books_id:books_id},function (e) {
+            layer.msg(e.msg);
+            if(e.code==1){
+                setTimeout(function () {
+                    window.location.href=e.url;
+                },2000);
+            }
+        });
+    });
+</script>
+{include file="template/imglazy" /}
+{include file="template/footer" /}

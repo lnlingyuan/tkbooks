@@ -1,0 +1,276 @@
+{include file="mobile/header" }
+<style>
+    @charset "UTF-8";
+    /* 排行榜页的一些样式 */
+    body {
+        background-color: #fff; }
+
+    .page-toplist .content {
+        padding-top: 2.75rem; }
+
+    .page-toplist .header {
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1; }
+
+    .page-toplist .module-rank-nav {
+        bottom: 0;
+        overflow-y: auto;
+        top: 2.75rem; }
+
+    .module-rank-nav {
+        float: left;
+        position: fixed; }
+
+    .rank-btn-tag::before {
+        position: absolute;
+        left: 0;
+        top: 0.625rem;
+        box-sizing: border-box;
+        width: 0.125rem;
+        height: 1.5rem;
+        content: '';
+        vertical-align: middle;
+        color: transparent;
+        border-left: 2px solid #fff;
+        padding-right: 1.0625rem; }
+
+    .active.rank-btn-tag::before {
+        border-left: 2px solid #65C541;
+        top: .7rem; }
+
+    .rank-btn-tag {
+        position: relative;
+        color: #808080;
+        font-size: 0.75rem;
+        line-height: 0.75rem;
+        width: 5rem;
+        height: 2.75rem;
+        text-align: center;
+        display: table; }
+
+    .rank-btn-tag.active {
+        color: #65C541;
+        font-size: 0.875rem;
+        line-height: 0.875rem; }
+
+    .book-desc {
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+
+    .book-cover {
+        width: 2.8125rem;
+        height: 3.75rem;
+        margin-right: 0.75rem; }
+
+    .book-title {
+        line-height: 1.2;
+        color: #1A1A1A;
+        font-size: 1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+
+    .book-intro {
+        font-size: .8125rem;
+        line-height: 1.2;
+        overflow: hidden;
+        height: .9rem;
+        margin: .4rem 0 0.35rem 0;
+        margin-right: 0;
+        word-break: break-all;
+        color: #808080;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+
+    .book-cover-msg {
+        width: 2.8125rem;
+        height: 3.75rem; }
+
+    .book-pic {
+        display: block;
+        width: inherit;
+        height: 3.75rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+    .book-cell {
+        overflow: hidden; }
+
+    .book-meta {
+        overflow: hidden; }
+
+    .book-meta-l {
+        float: left; }
+
+    .book-author {
+        font-size: 0.75rem;
+        display: block;
+        overflow: hidden;
+        max-width: 10em;
+        max-width: calc(100vw - 2rem - (176rem / 16));
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #808080; }
+
+    .book-meta-r {
+        position: relative;
+        float: right; }
+
+    .book-meta-r .tag-small-group {
+        position: absolute;
+        top: -.375rem;
+        right: 0;
+        white-space: nowrap; }
+
+    .tag-small-group {
+        display: inline-block; }
+
+    .module-rank-booklist {
+        margin-left: 5rem;
+        overflow-y: scroll;
+        overflow: hidden;
+        border-left: 1px solid #f0f1f2;
+        display: none; }
+
+    .origin-right {
+        -webkit-transform-origin: right center;
+        transform-origin: right center; }
+
+    .top-box {
+        width: 0;
+        height: 0;
+        border-width: 0.875rem 0.875rem;
+        border-style: solid;
+        border-color: #65C541 transparent transparent #65C541;
+        position: absolute;
+        top: 1rem;
+        left: 1rem; }
+
+    .rank-list {
+        display: table-cell;
+        font-weight: 400;
+        vertical-align: middle; }
+    .rank-list .mul {
+        display: inline-block;
+        line-height: 1.1;
+        max-width: 4em;
+        vertical-align: middle; }
+
+    .module-rank-booklist.active {
+        display: block;
+        margin-top: 40px;}
+
+    .top-number {
+        min-width: .625rem;
+        padding: 0 .125rem;
+        width: auto;
+        height: 0.875rem;
+        display: block;
+        color: #fff;
+        background-color: #65C541;
+        text-align: center;
+        line-height: 0.875rem;
+        position: absolute;
+        font-size: 0.625rem; }
+
+    .month-number {
+        color: #65C541;
+        font-size: 0.875rem;
+        line-height: 1.1;
+        float: right; }
+
+</style>
+<div class="page page-toplist">
+<!-- 公用头部 S -->
+<header id="header" class="header">
+    <a href="javascript:history.go(-1)" class="header-back jsBack">
+        <svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+    </a>
+    <h1 class="header-back-title">排行榜</h1>
+    <div class="header-operate">
+        <a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+            <svg><use xlink:href="#icon-search"></use></svg>
+        </a>
+        <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+    </div>
+</header>
+
+{include file="mobile/more_navigation" /}
+
+<div class="module module-merge">
+    <div class="module-rank-nav" id="rankNav" data-type="0"><line style="width: 80px; left: 0px;"></line>
+
+        {volist name='$data' id='vo' }
+        <a href="javascript:;" class="rank-btn-tag ranka" key="{$vo.id}">
+            <h4 class="rank-list">{$vo.name}</h4>
+        </a>
+        {/volist}
+    </div>
+
+
+    <div id="rank-0" class="module-rank-booklist active ">
+        {volist name='$data' id='vo'  }
+        <ol class="jsBooks rankall" data-cached="true" id="box{$vo.id}">
+            {volist name='$vo.res' id='vi' key='ky' }
+            <li class="book-li rankbook">
+                <a href="{:url('/cover/index',['books_id'=>$vi.books_id])}" class="book-layout">
+                    <div class="book-cover">
+                        <span class="top-number">{$ky}</span>
+                        <div style="width: 100%">
+                            <img src="__BOOKSIMG__/{$vi.books_img}" class="book-pic" alt="">
+                        </div>
+                    </div>
+                    <div class="book-cell">
+
+                        <h4 class="book-title">{$vi.books_name}</h4>
+                        <p class="book-intro">{$vi.books_synopsis}</p>
+                        <div class="book-meta">
+                            <div class="book-meta-l">
+                        <span class="book-author">
+                            <svg class="icon icon-human" role="img" title="{$vi.books_author}"><use xlink:href="#icon-human"></use></svg>{$vi.books_author}
+                        </span>
+                            </div>
+                            <div class="book-meta-r">
+                        <span class="tag-small-group origin-right">
+                            <em class="tag-small lightgreen">{$types[$vi.books_type]}</em>
+                            <em class="tag-small smallblue">{eq name="$vi.books_status" value="0"}连载中{else/} 完结{/eq}</em>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            {/volist}
+        </ol>
+
+        {/volist}
+
+    </div>
+
+
+
+</div>
+</div>
+<script>
+    $(function () {
+        $(".ranka").click(function () {
+            var id = $(this).attr('key');
+            $(".ranka").removeClass('active');
+            $(this).addClass('active');
+            if(id=='all'){
+                $(".rankall").show();
+            }else{
+                $(".rankall").hide();
+                $("#box"+id).show();
+            }
+
+        });
+
+        $(".ranka:first").click();
+    })
+
+</script>
+{include file="mobile/footer" }

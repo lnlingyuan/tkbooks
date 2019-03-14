@@ -1,0 +1,111 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+            <input type="hidden" name="admin_id" value="{$data.admin_id}">
+            <input type="hidden" name="action" value="edit">
+
+            <div class="layui-form-item">
+                <label for="L_username" class="layui-form-label">
+                    <span class="x-red">*</span>管理员名称
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_adminname" name="admin_name" required="" lay-verify="nikename" autocomplete="off" class="layui-input" value="{$data.admin_name}" >
+                </div>
+
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-red">*</span>将会成为您唯一的登入名
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_password" class="layui-form-label">
+                    <span class="x-red">*</span>密码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="password" id="L_pwd" name="admin_password" required="" lay-verify="required" value="{$data.admin_password}"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"> <span class="x-red">*</span>权限范围</label>
+                <div class="layui-input-block">
+                    {volist name="meun" id="vo"}
+                    <input type="checkbox" name="admin_power[]" lay-skin="primary" title="{$vo}" value="{$vo}" {if condition="in_array($vo,$data['admin_power'])"} checked {/if} >
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>{$vo}</span><i class="layui-icon layui-icon-ok"></i></div>
+                    {/volist}
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_admin_describe" class="layui-form-label">
+                    <span class="x-red">*</span>描述
+                </label>
+                <div class="layui-input-inline">
+                    <textarea type="text" name="admin_describe" lay-verify="required" autocomplete="off" class="layui-textarea">{$data.admin_describe}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_status" class="layui-form-label">
+                    <span class="x-red">*</span>状态
+                </label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_disable" value="0" title="启用" {if condition="$data.is_disable eq 0" }checked{/if}>
+                    <input type="radio" name="is_disable" value="1" title="禁用" {if condition="$data.is_disable eq 1" }checked{/if}>
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 2) {
+                    return '昵称至少得2个字符啊';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/user/adminedit',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert("编辑成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+
+
+
+  </script>
+
+  </body>
+
+</html>

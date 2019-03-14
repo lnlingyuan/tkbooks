@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{$module_data.name} {$chapter_name}</title>
+	<meta name="keywords" content="{$module_data.keywords}" />
+	<meta name="description" content="{$module_data.descript}" />
+<meta name="robots" content="all">
+<meta name="googlebot" content="all">
+<meta name="baiduspider" content="all">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<!-- 样式 S -->
+	<link rel="stylesheet" href="__CSS__/mobile_style.css">
+
+                <link rel="stylesheet" href="__CSS__/mobile_info.css">
+
+
+</head>
+<body class="{$fit.background} {if condition='$fit.time eq 1'} read-night{/if}"   style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);">
+{include file="mobile/icon" /}
+
+<input type="hidden" value="{$chapter_url}" name="chapter_url" />
+<input type="hidden" value="{$fit.font}" name="font" class="fit"  />
+<input type="hidden" value="{$fit.size}" name="size" class="fit"  />
+<input type="hidden" value="{$fit.background}" name="background" class="fit"  />
+<input type="hidden" value="{$fit.slide}" name="slide" class="fit"  />
+<input type="hidden" value="{$fit.time}" name="time" class="fit"  />
+
+<aside id="asideChapter" class="aside active " data-is-bind-scroll="true" style="display: none;"><i id="asideOverlay" class="aside-overlay" role="button" title="点击关闭浮层"></i>
+	<div id="asideChapterContent" class="aside-content" style="">
+		<div id="chapterNav" class="btn-group-tab">
+			<nav class="btn-group">
+				<h3 class="btn-group-cell"><a href="javascript:" class="btn-blank active" data-rel="catelogX">目录</a></h3>
+			</nav>
+		</div>
+		<div class="module module-merge">
+			<!-- 目录页内容 -->
+			<div id="catelogX" class="chapter-tab-x active">
+				<div class="module-header">
+					<div class="module-header-l">
+						<h4 class="chapter-sub-title">共<output class="chapter_num"></output>章</h4>
+					</div>
+					<div class="module-header-r">
+						<!--<a id="reverse" href="javascript:" class="module-header-btn dark">倒序</a>-->
+					</div>
+				</div>
+				<ol id="volumes" class="chapter-ol chapter-ol-catalog menus">
+					<li class="chapter-bar">正文</li>
+
+				</ol>
+			</div>
+			<!-- 书签页内容 -->
+			<div id="bookmarkX" class="chapter-tab-x">
+			</div>
+		</div>
+	</div>
+</aside>
+
+
+
+
+<!-- 悬浮层 S -->
+<div id="pageRead" class="page-read">
+	<content id="readContent" class="page-read-content">
+		<div class="page-read-top">
+			<h1 id="chapterTitle" class="read-book-name">{$chapter_name}</h1>
+			<!--<a href="{:url('/shelf/index')}" class="info_cover"><svg><use xlink:href="#icon-book"></use></svg></a>-->
+		</div>
+
+	<!-- 下拉加载上一章 E -->
+	<article id="chapterContent" class="read-article" style="font-size: {$fit.size};" >
+	<section class="read-section jsChapterWrapper" id="jsChapterWrapper" style="transform: translateX(0px);" >
+	<h3>{$chapter_name}</h3>
+	<p class="chapter_content">{$text}</p>
+	<div class="read-chapter-forum">
+		<!--<a class="read-chapter-forum-link" >查看目录 »</a>-->
+	</div>
+	</section>
+
+	</article>
+	<!-- 上拉加载下一章 S -->
+	<div id="readLoadNext" class="read-load-next burl">
+		<a id="btnLoadNextChapter" href="javascript:;" target="_self" class="btn-normal blue" data-size="14"><span>加载下一章</span></a>
+</div>
+<!-- 上拉加载下一章 E --></content>
+	<!--<p id="pageNum" class="read-page-num">2/4</p>-->
+</div>
+<div id="pageReadOpt" class="page-read-opt active" data-settings-key="r_set" data-settings-str="dn:n|fs:2|skin:3|vh:v" style="display: none;">
+	<header class="header read-opt-header">
+
+
+		<a href="javascript:history.go(-1)" class="header-back jsBack outBookShelf">
+			<svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+		</a>
+
+		<div class="header-operate">
+			<a id="readBtnMore" href="javascript:" class="btn-group-cell icon icon-dots jsLayerTrigger btn_bottom" title="更多操作" data-rel="readMoreX"><svg><use xlink:href="#icon-dots"></use></svg></a>
+		</div>
+	</header>
+
+	<!-- 加入书架 -->
+	<a href="javascript:" id="readJoinSJ" class="read-join-sj">加入书架</a>
+
+	<!-- 更多操作下拉 -->
+	<div id="readMoreX" class="read-opt-more read-opt-public">
+		<a href="javascript:" id="btnDownloadFreeChapters" class="read-opt-a"><svg class="icon icon-down"><use xlink:href="#icon-down"></use></svg>下载书籍</a>
+		<a href="{:url('/cover/index',['books_id'=>$books_id])}" class="read-opt-a"><svg class="icon icon-note"><use xlink:href="#icon-note"></use></svg>书籍详情</a>
+		<a href="javascript:" class="read-opt-a openshelf"><svg class="icon icon-book"><use xlink:href="#icon-book"></use></svg>返回我的书架</a>
+		 <a href="javascript:" class="read-opt-a" id="read_share"><svg class="icon icon-share"><use xlink:href="#icon-share"></use></svg>分享本章</a>
+		<!--<a href="javascript:" class="read-opt-a chapterComplain"><svg class="icon icon-jubao"><use xlink:href="#icon-jubao"></use></svg>章节举报</a>-->
+	</div>
+
+	<!--发表章评 -->
+	<!--<a href="javascript:;" class="read-chapter-comment elCommentBtn"><svg class="icon icon-chapercomment"><use xlink:href="#icon-chapercomment"></use></svg></a>-->
+
+	<!-- 进度 -->
+	<div id="readOptProg" class="read-opt-bot read-opt-prog read-opt-public" style="opacity: 1;">
+		<div class="read-prog-info">
+			<a href="javascript:;" id="readProgPrev" class="read-prog-prev" data-index="0">
+				<svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+				<span>上一章</span>
+			</a>
+			<a href="javascript:" id="readProgNext" class="read-prog-next" data-index="1">
+				下一章<svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+			</a>
+			<div id="readProgVal" class="read-prog-val">
+				<h4 class="ell">{$chapter_name}</h4>
+				<output class="readProgJd">0.0%</output>
+			</div>
+		</div>
+		<div class="read-prog-bar">
+			<div class="range" style="width: 80%;" id="schedule">
+				<div class="range-track range_jdt" style="border-left-width: 1.4928px;"><a class="range-thumb" id="read_jd"></a></div></div>
+		</div>
+	</div>
+
+	<!-- 肤色等设置 -->
+	<div id="readOptSet" class="read-opt-bot read-opt-set read-opt-public">
+		<!-- 文字设置 -->
+		<div class="read-set-font">
+			<a href="javascript:" id="readFontDown" class="read-font-down" data-index="0">
+				<svg class="icon icon-size-down"><use xlink:href="#icon-size-down"></use></svg>
+			</a>
+			<a href="javascript:" id="readFontUp" class="read-font-up" data-index="1">
+				<svg class="icon icon-size-up"><use xlink:href="#icon-size-up"></use></svg>
+			</a>
+			<div class="read-font-bar">
+				<div class="range" id="size_width" style="width: 70%;">
+					<div class="range-track range_size" id="range_size" style="border-left-width: 120px;">
+						<a class="range-thumb" id="read_font" ></a></div></div><!-- 3默认值对应1.125rem，约18px -->
+			</div>
+		</div>
+		<!-- 肤色设置 -->
+		<div id="readSetSkin" class="read-set-skin">
+			<ul class="btn-group">
+				<li class="btn-group-cell read-set-cell">
+					<input type="radio" id="skinDefault" name="skin" value="default" data-index="0">
+					<label class="read-skin-default" for="skinDefault" title="默认皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+				</li>
+				<li class="btn-group-cell read-set-cell">
+					<input type="radio" id="skinBlue" name="skin" value="blue" data-index="1">
+					<label class="read-skin-blue" for="skinBlue" title="蓝色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+				</li>
+				<li class="btn-group-cell read-set-cell">
+					<input type="radio" id="skinGreen" name="skin" value="green" data-index="2">
+					<label class="read-skin-green" for="skinGreen" title="绿色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+				</li>
+				<li class="btn-group-cell read-set-cell">
+					<input type="radio" id="skinLight" name="skin" value="light" data-index="3">
+					<label class="read-skin-light" for="skinLight" title="浅色皮肤"><svg class="icon icon-ok center"><use xlink:href="#icon-ok"></use></svg></label>
+				</li>
+			</ul>
+		</div>
+		<!-- 布局设置 -->
+		<div id="readSetLayout" class="read-set-layout">
+			<ul class="btn-group">
+				<li class="btn-group-cell read-set-cell Slide_tb">
+					<input type="radio" id="layoutV" name="layout" value="v" checked="">
+					<label class="read-btn-layout" for="layoutV">上下滑动</label>
+				</li>
+				<li class="btn-group-cell read-set-cell Slide_lr">
+					<input type="radio" id="layoutH" name="layout" value="h">
+					<label class="read-btn-layout" for="layoutH">左右滑动</label>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<!-- 底部 -->
+	<footer class="read-opt-footer">
+		<nav class="btn-group">
+			<a id="lookchapter" href="#current"  class="btn-group-cell btn_bottom" data-rel="asideChapter" role="button" aria-haspopup="true">
+				<svg class="icon icon-catalog"><use xlink:href="#icon-catalog"></use></svg>
+				<h4 class="read-opt-footer-h">目录</h4>
+			</a>
+			<a href="javascript:" id="readBtnProg" class="btn-group-cell jsLayerTrigger btn_bottom"  data-rel="readOptProg">
+				<svg class="icon icon-progress"><use xlink:href="#icon-progress"></use></svg>
+				<svg class="icon icon-progress-on"><use xlink:href="#icon-progress-on"></use></svg>
+				<h4 class="read-opt-footer-h">进度</h4>
+			</a>
+			<a href="javascript:" id="readBtnSet" class="btn-group-cell jsLayerTrigger btn_bottom" data-rel="readOptSet">
+				<svg class="icon icon-font-set"><use xlink:href="#icon-font-set"></use></svg>
+				<svg class="icon icon-font-set-on"><use xlink:href="#icon-font-set-on"></use></svg>
+				<h4 class="read-opt-footer-h">设置</h4>
+			</a>
+
+			<a href="javascript:" id="readBtnMode" class="btn-group-cell btn_bottom" data-mode="{if condition='$fit.time eq 1'}day{else /}night{/if}">
+				<svg class="icon icon-day"><use xlink:href="#icon-day"></use></svg>
+				<svg class="icon icon-night"><use xlink:href="#icon-night"></use></svg>
+				<h4 class="read-opt-footer-h">{if condition='$fit.time eq 1'}日间{else /}夜晚{/if}</h4>
+			</a>
+			<a href="{:url('/info/forum',['books_id'=>$books_id])}" class="btn-group-cell btn_bottom">
+				<svg class="icon icon-comment"><use xlink:href="#icon-comment"></use></svg>
+				<h4 class="read-opt-footer-h">评论</h4>
+			</a>
+		</nav>
+	</footer>
+</div>
+
+<!--悬浮层-->
+
+<script type="text/javascript" src="__JS__/jq-c0eb42550f.1.11.min.js"></script>
+<script type="text/javascript" src="__JS__/layer_mobile/layer.js"></script>
+
+<script>document.write("<script type='text/javascript' src='__JS__/common.js?v=" + Date.now() + "'><\/script>");</script>
+<script>document.write("<script type='text/javascript' src='__JS__/mobile_info.js?v=" + Date.now() + "'><\/script>");</script>
+
+<script type="text/javascript">
+
+
+$(function () {
+
+
+    var chapter_url = $("input[name='chapter_url']").val();
+    chapter_url = $.trim(chapter_url);
+    var books_id = "{$books_id}";
+
+    /*预读下一章*/
+    $.post("/info/nextchapter",{chapter_url:chapter_url,books_id:books_id},function(e){
+        $("#btnLoadNextChapter").attr("href",e.data);
+        $("#readProgNext").attr("href",e.data);
+    },"json");
+
+    /*上一章*/
+    $.post("/info/upperchapter",{chapter_url:chapter_url,books_id:books_id},function(e){
+        $("#readProgPrev").attr("href",e.data);
+    },"json");
+
+    //请求目录
+    $.post("/info/ajaxCatalog",{books_id:books_id},function (catalog) {
+
+        var html='';
+        $.each(catalog, function (i,n) {
+
+            var chapter_url ="{$chapter_url}";
+
+            if(base64Encode(chapter_url) == n[1]){
+                html+='<li class="chapter-li jsChapter"><a href="'+n[1]+'" class="chapter-li-a" name="current" ><span class="chapter-index red" >'+n[0]+'</span></a></li>';
+            }else{
+                html+='<li class="chapter-li jsChapter"><a href="'+n[1]+'"  class="chapter-li-a"><span class="chapter-index ">'+n[0]+'</span></a></li>';
+            }
+
+
+        });
+        var length = catalog.length;
+
+        $("h4>output").html(length);
+
+        $('#volumes').append(html);
+
+    },"json");
+
+
+
+});
+
+
+
+
+$("#btnLoadNextChapter").click(function () {
+    var href = $(this).attr('href');
+    if(href == 'javascript:void(0);'){
+        //提示
+        layer.open({
+            content: '已经是最后一章了'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+
+    }else{
+        if(href == 'javascript:;'){
+            layer.open({
+                type: 2
+                ,content: '加载中'
+				,time:1
+            });
+        }
+
+    }
+});
+
+
+$("#readProgPrev").click(function () {
+    var href = $(this).attr('href');
+    if(href == 'javascript:void(0);'){
+        //提示
+        layer.open({
+            content: '已经是第一章了'
+            ,skin: 'msg'
+            ,time: 2 //2秒后自动关闭
+        });
+
+    }else{
+        if(href == 'javascript:;'){
+            layer.open({
+                type: 2
+                ,content: '加载中'
+                ,time:1
+            });
+        }
+
+    }
+});
+
+    //加入书架
+    $("#readJoinSJ").click(function () {
+
+            var books_id ="{$books_id}";
+            $.post("/cover/addShelf",{books_id:books_id},function (data) {
+                //提示
+                layer.open({
+                    content: data.msg
+                    ,skin: 'msg'
+                    ,time: 2 //2秒后自动关闭
+                });
+
+            },"json");
+
+
+    });
+
+    //分享到qq空间
+    $("#read_share").click(function () {
+        var s = $.trim($(".chapter_content").text());
+        var summary = s.substr(0, 40)+'......'; // 获取子字符串, 从下表12开始, 截取5个字符
+
+        var p = {
+            url:location.href,
+            showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+            desc:'太好看了，我都停不下来',/*默认分享理由(可选)*/
+            summary:summary,/*分享摘要(可选)*/
+            title:"{$chapter_name}",/*分享标题(可选)*/
+            site:"{$module_data.name}",/*分享来源 如：腾讯网(可选)*/
+            pics:'', /*分享图片的路径(可选)*/
+            style:'203',
+            width:98,
+            height:22
+        };
+        var s = [];
+        for(var i in p){
+            s.push(i + '=' + encodeURIComponent(p[i]||''));
+        }
+        window.open("http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?"+s.join('&'));
+
+    });
+
+
+
+
+//页面加载后匹配阅读进度条位置
+$("#readBtnProg").click(function () {
+    chapterwz();
+});
+
+//页面加载后匹配字体进度条位置
+var font_left = "{$fit.font}"+'px';
+$('.range_size').css('border-left-width', font_left);
+
+//页面加载后匹配背景色
+var background = "{$fit.background}";
+$(".read-"+background).click();
+
+//页面加载后匹配阅读方式
+var slide = "{$fit.slide}";
+
+if(slide == 'Slide_lr'){
+    $("#pageRead").addClass("H");
+    $("#layoutH").click();
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>{$module_data.name}-注册页</title>
+    <meta name="keywords" content="{$module_data.keywords}" />
+    <meta name="description" content="{$module_data.descript}" />
+    <link rel="shortcut icon" href="__IMG__/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="__CSS__/style.css">
+
+</head>
+
+<body class="topline">
+
+
+
+<div class="signUpPage">
+    <div class="wrapper">
+        <div class="loginwrap">
+            <div class="loginbox">
+                <div>
+                    <div class="entrance" style="opacity: 1; visibility: visible; transform: translateX(0px);">
+                        <a href="javascript:history.go(-1)">返回&gt;&gt;</a>
+                    </div>
+                    <div class="logininput" style="opacity: 1; visibility: visible; transform: translateX(0px);">
+                        <h1 class="logo" style="margin: 20px auto;">
+                            <img src="__IMG__/logo.png">
+                        </h1>
+                        <div class="uniqueVerify">
+                            <form class="ant-form ant-form-horizontal" action="{:url('/login/userRegister')}" method="post" enctype="multipart/form-data" >
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-col-6 ant-form-item-label">
+                                        <label class="">用户名</label>
+                                    </div>
+                                    <div class="ant-col-12">
+                                        <div class="ant-form-item-control ">
+                                            <span class="ant-input-wrapper">
+                                                <input type="text" name="username" class="ant-input ant-input-lg phoneVerifyStyle" placeholder="请输入用户名" id="validating" value="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="yzcode">
+                            <label>邮箱：</label>
+                            <input type="text" id="js_vodevalue" placeholder="请输入邮箱" name="email">
+
+                        </div>
+                        <div class="yzcode">
+                            <label>验证码：</label>
+                            <input type="text" class="vodevalue" placeholder="请输入邮箱验证码" name="email_vodevalue">
+                            <div class="couterDiv">
+                                <div>
+                                <input type="button" id="verifyCode" class="getcodebtn___1klXT" value="点击获取">
+                                <p class="dismiao" style="font-size: 12px;padding-top: 16px;display: none;"></p></div>
+                            </div>
+                        </div>
+                        <div class="zcpwd mrgT">
+                            <label>密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                            <input type="password" class="userPassword" placeholder="请输入密码" name="password">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </div>
+                        <div class="zcpwd mrgT">
+                            <label>确认密码：</label>
+                            <input type="password" class="userPassword userPasswordRe" placeholder="请再次输入密码" name="userpassword">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </div>
+                        <div class="remember mrgT">
+                            <label class="ant-checkbox-wrapper">
+                                    <span class="ant-checkbox register_ok" style="margin-left:-9px !important;">
+                                        <span class="ant-checkbox-inner"></span>
+                                        <input type="checkbox" class="ant-checkbox-input register_checkbox" alue="on">
+                                    </span>
+                                <span style="font-size:10px;">
+                                        <span>我已阅读、了解并接受<a id="verifyXy">《{$module_data.name}用户服务协议》</a></span>、
+                                        <span><a id="verifyXy-ys">《隐私保护政策》</a></span>
+                                    </span>
+                            </label>
+                        </div>
+                        <button disabled="" id="signUp" type="button"  class="ant-btn  ant-btn-primary disabled ant-button-sq">
+                            提交注册
+                        </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="bottomTextOuter___Vf6Bt">
+                <div class="bottomText___1GSrB">
+                    <span>©{$module_data.name}2018</span>&nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.aliwx.net/about.php">关于我们</a></span>
+                    &nbsp;&nbsp;&nbsp;
+                    <span>|</span>&nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.aliwx.net/contribute.php">投稿声明</a></span>&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;<span><a href="http://www.aliwx.net/copyinfo.php">版权声明</a></span>&nbsp;&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;&nbsp;<span><a href="http://www.aliwx.net/contact.php">联系我们</a></span></div></div></div></div></div>
+
+
+<script type="text/javascript" src="__JS__/jq-c0eb42550f.1.11.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery-546c1da987.lazyload.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery-ui-019252536e.js"></script>
+<script>document.write("<script type='text/javascript' src='__JS__/common.js?v=" + Date.now() + "'><\/script>");</script>
+<script type="text/javascript" src="__JS__/layer/layer.js"></script>
+
+<script>
+    $(function () {
+        $("#verifyCode").click(function () {
+
+            var email = $("input[name='email']").val();
+
+            if(email == undefined || email == '' ){
+                layer.msg("邮箱不能为空！");
+                return false;
+            }
+
+            var reg =  /^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/;
+            if (!reg.test(email)) {
+                layer.msg('邮箱格式不正确，请重新填写!');
+                return false;
+            }
+
+
+            $.post('/login/getEmail',{email:email,type:'r'},function (e) {
+                layer.msg(e.msg);
+                if(e.code == 200){
+                    $("#verifyCode").hide();
+                    $(".dismiao").show();
+                    var setTime;
+                    $(document).ready(function(){
+                        var time=60;
+                        setTime=setInterval(function(){
+                            if(time<=0){
+                                $("#verifyCode").show();
+                                $(".dismiao").hide();
+                                clearInterval(setTime);
+                                return;
+                            }
+                            time--;
+                            $(".dismiao").text(+time+'秒后重新获取');
+                        },1000);
+                    });
+                }
+            });
+
+
+        });
+
+        $("#signUp").click(function () {
+
+            $.post('/login/userRegister',$('form').serialize(),function (e) {
+                layer.msg(e.msg);
+                if(e.code==1){
+                    setTimeout(function () {
+                        window.location.href=e.url;
+                    },2000);
+                }
+            });
+        });
+
+
+
+
+    });
+</script>
+
+
+</body>
+</html>

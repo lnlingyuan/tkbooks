@@ -1,0 +1,71 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+
+          <div class="layui-form-item">
+              <label for="L_typename" class="layui-form-label">
+                  <span class="x-red">*</span>分类名
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_typename" placeholder="分类名"  name="type_name" required="" lay-verify="required"  autocomplete="off" class="layui-input" value="" >
+              </div>
+
+          </div>
+            <div class="layui-form-item">
+              <label for="L_type_sort" class="layui-form-label">
+                  <span class="x-red">*</span>分类排序
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_type_sort" placeholder="分类排序"  name="type_sort" required=""  lay-verify="required"   autocomplete="off" class="layui-input" value="" >
+              </div>
+
+          </div>
+
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+
+        //监听提交
+        form.on('submit(add)', function(data){
+
+          $.post('/admin.php/type/add',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert(e.msg, {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+
+
+  </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,278 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+
+<!--幻灯片 -->
+<div class="carrousel" id="banner">
+    <div class="banberbox">
+        <div class="corrouselbox">
+            <ul class="txtinof"  >
+                {volist name="data" id="vo"}
+                <li class="hero"  style="left: -2400px;">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}"><h2 class="bktitle">{$vo.books_name}</h2>
+                        <p class="classify f16">{$vo.books_author}/{$types[$vo.books_type]}</p>
+                        <p class="intro f16">{$vo.books_synopsis}</p></a>
+                </li>
+
+                {/volist}
+            </ul>
+        </div>
+        <div class="thumbnail">
+            <ul class="smallul">
+                {volist name="data" id="vo" key="k" }
+                {eq name="$k" value="1"}
+                <li class="on" >
+                    <img   src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}"  width="48" style="width: 90px; margin-top: 0px; display: inline-block;">
+                </li>
+                {else/}
+                <li >
+                    <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" width="48" style="width: 48px; margin-top: 30px; display: inline-block;">
+                </li>
+                {/eq}
+                {/volist}
+
+
+
+            </ul>
+
+        </div>
+        <a id="lbl_btn" class="caleft" href="javascript:void(0)"></a>
+        <a id="lbr_btn" class="caright" href="javascript:void(0)"></a>
+    </div>
+</div>
+
+<!--榜单-->
+<div class="pcbox">
+    <div class="channel clearfix">
+        <div class="channelbox" id="manbd">
+            <div class="chatitle">
+                <h2>人气榜单</h2>
+            </div>
+            <ul class="chalistbox" lmk="indexnpbd" lmv="男频榜单">
+
+
+                {volist name="all" id="vo" offset="0" length='5'  key="k" }
+                <li class="clearfix">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                        <em class="chan">{$k}.</em>
+                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}"  alt="">
+                        <h3>{$vo.books_name}</h3>
+                        <p>{$vo.books_author}/{$types[$vo.books_type]}</p>
+                    </a>
+                </li>
+                {/volist}
+
+            </ul>
+            <div class="chamove hide">
+                <a href="#">更多&gt;</a>
+            </div>
+        </div>
+        <div class="channelbox" id="wombd">
+            <div class="chatitle">
+                <h2>热销榜单</h2>
+            </div>
+            <ul class="chalistbox" lmk="indexgpbd" lmv="女频榜单">
+
+                {volist name="all" id="vo" offset="46" length='5'  key="k" }
+                <li class="clearfix">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                        <em class="chan">{$k}.</em>
+                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" alt="">
+                        <h3>{$vo.books_name}</h3>
+                        <p>{$vo.books_author}/{$types[$vo.books_type]}</p>
+                    </a>
+                </li>
+                {/volist}
+
+            </ul>
+            <div class="chamove hide">
+                <a href="#">更多&gt;</a>
+            </div>
+        </div>
+        <div class="channelbox" id="typebd">
+            <div class="chatitle">
+                <h2>分类推荐榜</h2>
+            </div>
+            <ul class="chalistbox" lmk="indexflbd" lmv="分类推荐榜">
+
+                {volist name="all" id="vo" offset="14" length='5'  key="k" }
+                <li class="clearfix">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                        <em class="chan">{$k}.</em>
+                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" alt="">
+                        <h3>{$vo.books_name}</h3>
+                        <p>{$vo.books_author}/{$types[$vo.books_type]}</p>
+                    </a>
+                </li>
+                {/volist}
+
+            </ul>
+            <div class="chamove hide">
+                <a href="#">更多&gt;</a>
+            </div>
+        </div>
+        <div class="channelbox wbox" id="zuibd">
+            <div class="chatitle">
+                <h2>强力推荐榜</h2>
+            </div>
+            <ul class="chalastbox" lmk="indexqlbd" lmv="强力推荐榜">
+                {volist name="all" id="vo" offset="19" length='10'  key="k" }
+                <li class="clearfix" lmk="indexqlbd-sj" lmv="书籍" urltrue="true" lmurl="#">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                        <em class="chan">{$k}.</em>
+                        <h3 class="lasth3">{$vo.books_name}</h3>
+                    </a>
+                </li>
+                {/volist}
+
+
+            </ul>
+            <div class="chamove hide">
+                <a href="#">更多&gt;</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--分类-->
+<div class="batchtotal" id="typetab1">
+    <table class="classtable" width="100%" border="0" cellspacing="0" lmk="indexfl" lmv="分类">
+
+        <tbody>
+        <tr>
+
+            <td lmk="indexfl-10002" lmv="玄幻" urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'1'])}" class="divhei" style="background:url(../static/images/class_1.jpg);background-size: cover;">
+                    <h3>玄幻</h3>
+                </a>
+            </td>
+
+
+            <td lmk="indexfl-10006" lmv="都市" urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'5'])}" class="divhei" style="background:url(../static/images/class_2.jpg);background-size: cover;">
+                    <h3>都市</h3>
+                </a>
+            </td>
+
+
+            <td lmk="indexfl-10008" lmv="历史" urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'6'])}" class="divhei" style="background:url(../static/images/class_3.jpg);background-size: cover;">
+                    <h3>历史</h3>
+                </a>
+            </td>
+
+
+            <td lmk="indexfl-10010" lmv="悬疑" urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'11'])}" class="divhei" style="background:url(../static/images/class_4.jpg);background-size: cover;">
+                    <h3>灵异</h3>
+                </a>
+            </td>
+
+        </tr>
+        <tr>
+
+
+            <td lmk="indexfl-10011"  urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'10'])}" class="divhei" style="background:url(../static/images/class_5.jpg);background-size: cover;"> <h3>科幻</h3>
+            </a></td>
+
+
+            <td lmk="indexfl-10016"  urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'2'])}" class="divhei" style="background:url(../static/images/class_6.jpg);background-size: cover;"> <h3>奇幻魔法</h3>
+            </a></td>
+
+
+            <td lmk="indexfl-10018"  urltrue="true" lmurl="#" rowspan="2">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'7'])}" class="rspan" style="background:url(../static/images/class_7.jpg);background-size: cover;"> <h3>军事</h3>
+            </a></td>
+
+
+            <td lmk="indexfl-10019"  urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'12'])}" class="divhei" style="background:url(../static/images/class_8.jpg);background-size: cover;"> <h3>衍生同人</h3>
+            </a></td>
+
+
+        </tr>
+        <tr>
+            <td lmk="indexfl-10020"  urltrue="true" lmurl="#" colspan="2">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'8'])}" class="divhei" style="background:url(../static/images/class_9.jpg);background-size: cover;">
+                    <h3>游戏竞技</h3>
+                </a>
+            </td>
+
+
+            <td lmk="indexfl-10021"  urltrue="true" lmurl="#">
+                <a href="{:url('/bibliotheca/index',['type_id'=>'4'])}" class="divhei" style="background:url(../static/images/class_10.jpg);background-size: cover;">
+                    <h3>武侠仙侠</h3>
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!--男频精选-->
+<div class="manbox" id="manwrap" lmk="indexnpjx" lmv="男频精选">
+    <div class="mantit">
+        <h2>热门精选</h2>
+    </div>
+    <div class="rollbox" id="manlb">
+        <div class="hotseam">
+            <ul class="count" nowthis="1">
+
+                {volist name="all" id="vo" offset="43" length='18'  key="k" }
+                <li class="">
+                    <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" width="120" height="160">
+                        <h3>{$vo.books_name}</h3>
+                        <p>{$vo.books_author}/{$types[$vo.books_type]}</p>
+                    </a>
+                </li>
+            {/volist}
+
+
+            </ul>
+
+        </div>
+
+        <a class="manlbtn slick-prev" href="javascript:void(0)"></a>
+        <a class="manrbtn slick-next" href="javascript:void(0)"></a>
+
+    </div>
+
+    <div class="mantable clearfix">
+        {foreach name="host" id="hvo"  key="hvk" }
+        <div class="manlist" id="mt1">
+            <dl>
+                <dt><h2>{$types[$hvk]}</h2></dt>
+                <dd>
+                    <ul>
+                        {volist name="hvo" id="ho" }
+                        <li ><a href="{:url('/cover/index',['books_id'=>$ho.books_id])}">{$ho.books_name}</a></li>
+                        {/volist}
+                    </ul>
+
+                </dd>
+
+            </dl>
+            <div class="chamove">
+                <a href="{:url('/bibliotheca/index',['type_id'=>$hvk])}">更多&gt;</a>
+            </div>
+        </div>
+        {/foreach}
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $(".caright").click();
+
+        //热门精选
+        lunpo($(".hotseam>ul>li"),$(".slick-next"),$(".slick-prev"));
+
+    });
+
+
+</script>
+
+{include file="template/imglazy" /}
+{include file="template/footer" /}

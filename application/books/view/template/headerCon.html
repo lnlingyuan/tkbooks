@@ -1,0 +1,204 @@
+<div class="header-con">
+    <div class="logo">
+        <h1><img src="__IMG__/logo.png"></h1>
+    </div>
+    <div class="header-logo">
+        <div class="widthfix center">
+            <div class="header ">
+                <input type="hidden" value="{$cer}" name="cer">
+                <ul class="pc-nav clearfix">
+                    <li class="zt"><a href="/" data-controller="Index">首页</a></li>
+                    <li class="tl"><a href="{:url('bibliotheca/index')}" data-controller="Bibliotheca" >书库</a></li>
+                    <li class="gx"><a href="{:url('rankinglist/index')}" data-controller="Rankinglist" >排行榜</a></li>
+                    <li class="gx"><a href="{:url('apotheosize/index')}" data-controller="Apotheosize" >封神榜</a></li>
+
+                    <li class="gx"><a href="{:url('index/copyright')}" data-controller="Copyright" >版权声明</a></li>
+
+                    <li class="gx"><a class="daohan" href="javascript:">二次元</a></li>
+
+                    <li class="gx"><a class="daohan" href="javascript:">作者福利</a></li>
+                    <li class="zs openshelf_pc"><a href="javascript:" data-controller="Shelf" >书架</a></li>
+                    <li class="zs"><a class="daohan" href="javascript:" >作者专区</a></li>
+                </ul>
+
+
+            </div>
+
+
+
+
+
+            <div class="user-login-info" >
+                <div id="loginCon">
+
+                        {if condition="!empty($session_name)"}
+                    <div class="u-lgn" id="login-not">
+                        <a class="ellipse" title="" style="margin-left: 18px;">{$session_name}</a>
+                        <ul class="nickname-list" style="display:none">
+                            <li><a href="{:url('user/index')}"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                            <li id="loginOut"><a href="javascript:;"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;登&nbsp;&nbsp;&nbsp;出</a></li>
+                        </ul>
+                    </div>
+                        {else /}
+                    <div class="u-lgn" id="login-link">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <span>登录</span>
+                    </div>
+
+
+                    <!--登陆框-->
+                    <div id="loginkuan" tabindex="-1" role="dialog"  class="ui-dialog login-dialog ui-widget ui-widget-content ui-front ui-resizable" aria-describedby="login" aria-labelledby="ui-id-1" style=" top: 141px; left: 347.5px; display: block; z-index: 101;display: none;">
+                        <div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix">
+                            <span id="ui-id-1" class="ui-dialog-title">&nbsp;</span><button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close"><span class="ui-button-icon ui-icon ui-icon-closethick"></span><span class="ui-button-icon-space"></span>Close</button>
+                        </div>
+                        <div id="login" style="" class="ui-widget ui-dialog-content ui-widget-content">
+                            <div id="login-vipjump-close" class="jump-close" style="cursor:pointer;">关闭</div>
+                            <div class="logininput">
+                                <h1 class="logo">
+                                    <img src="__IMG__/logo.png">
+                                </h1>
+
+
+                                <form action="{:url('/login/login')}" method="post" enctype="multipart/form-data">
+                                    <div class="loginname">
+                                        <input type="text" name="username" placeholder="请输入用户名" value="">
+                                    </div>
+                                    <div class="loginpwd">
+                                        <input type="password" name="password" placeholder="请输入密码" value="123456">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </div>
+
+
+                                    <div class="logincheckPic">
+                                        <input type="text" class="userCheckPic" name="userCheckPic" placeholder="请输入右侧图形校验码">
+                                        <span id="checkCodePic-btn" class="checkCodePic">{:captcha_img()}</span>
+                                    </div>
+
+
+                                    <div class="mrgT login-protocal">
+                                        <label class="ant-checkbox-wrapper">
+                                                    <span>
+                                                        <span id="login-protocal-checkbox" class="ant-checkbox login_ok">
+                                                        <span class="ant-checkbox-inner "></span>
+                                                        <input type="checkbox" class="ant-checkbox-input login_checkbox" value="off">
+                                                        </span>
+
+                                                        <span>我已阅读、了解并接受<a id="verifyXy-dl" class="pro-color">《{$module_data.name}用户服务协议》</a>、
+                                                            <a id="verifyXy-ysdl" class="pro-color">《隐私保护政策》</a></span>
+                                                    </span>
+                                        </label>
+                                    </div>
+
+
+                                    <button type="button" id="signUp" class="ant-btn ant-btn-primary ant-btn-lg ant-button-sq loginbtn disabled"  disabled="disabled">
+                                        <span>登 录</span>
+                                    </button>
+                                </form>
+                                <div class="register">
+                                    <div class="remember" style="display: inline;">
+                                        <label class="checkbox-re ant-checkbox-wrapper">
+                                                        <span id="login-remember-checkbox" class="ant-checkbox">
+                                                        <span class="ant-checkbox-inner"></span>
+                                                        <input type="checkbox" class="ant-checkbox-input" value="off">
+                                                        </span>
+                                            <span style="font-size: 14px;">记住密码</span>
+                                        </label>
+                                    </div><i>|</i>
+                                    <a href="{:url('/login/register')}">注册账号</a><i>|</i>
+                                    <a href="{:url('/login/forgetpassword')}">忘记密码?</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="backwhite" class="ui-widget-overlay ui-front" style="z-index: 100;display: none;"></div>
+                    <!--登陆框 end-->
+
+
+                        {/if}
+                    </div>
+
+
+
+
+                <span class="secah-box glyphicon glyphicon-search" id="search_box_btn">
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!--搜索框-->
+    <div class="secah-con">
+        <div class="secahdiv">
+            <input id="js_searchInput_common" type="text" class="search_input width-search" value="" maxlength="20" name="search" placeholder="搜索书名/关键字" autocomplete="off">
+            <input id="js_search_common" type="button" class="query-btn" lmk="search" lmv="搜索" urltrue="true" lmurl="#">
+        </div>
+    </div>
+    <script>
+        $(function () {
+
+            function getSearch() {
+                var search = $("input[name='search']").val();
+                if(search){
+                    window.location.href = "/Search/index/books_name/"+search;
+                }
+            }
+            $("#js_search_common").click(function () {
+                getSearch();
+            });
+
+            //回车快捷查询
+            $(".secahdiv").keypress(function (e) {
+                var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+                if (keyCode == 13){
+                    getSearch();
+                }
+            });
+
+            $("#signUp").click(function () {
+                $.post('/login/login',$("form").serialize(),function (e) {
+                    layer.msg(e.msg);
+                    if(e.code==1){
+                        setTimeout(function () {
+                            window.location.href=e.url;
+                        },2000);
+                    }
+                });
+            });
+
+            //退出登陆
+            $("#loginOut").click(function () {
+                $.post('/login/loginOut','',function (e) {
+                    layer.msg(e.msg);
+                    if(e.code==1){
+                        setTimeout(function () {
+                            window.location.href=e.url;
+                        },2000);
+                    }
+                });
+            });
+
+
+            $(".daohan").click(function () {
+                layer.msg('暂未开放');
+            });
+
+
+            var cer = $("input[name='cer']").val();
+            $(".pc-nav li a").each(function(i,e){
+                var now = $(this).attr('data-controller');
+                if(cer == now){
+                    $(this).addClass('active');
+                    return false;
+                }
+
+            });
+
+        })
+    </script>
+
+</div>

@@ -1,0 +1,53 @@
+<html><head>
+    <meta charset="utf-8">
+    <title>{$module_data.name}</title>
+    <meta name="keywords" content="{$module_data.keywords}" />
+    <meta name="description" content="{$module_data.descript}" />
+
+    <meta name="robots" content="all">
+    <meta name="googlebot" content="all">
+    <meta name="baiduspider" content="all">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+
+    <!-- 样式 S -->
+
+    <link rel="stylesheet" href="__CSS__/mobile_style.css">
+    <link rel="stylesheet" href="__CSS__/mobile_sprite.css">
+    <script type="text/javascript" src="__JS__/jq-c0eb42550f.1.11.min.js"></script>
+    <script type="text/javascript" src="__JS__/layer_mobile/layer.js"></script>
+    <script>document.write("<script type='text/javascript' src='__JS__/common.js?v=" + Date.now() + "'><\/script>");</script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?fb88a436a9da0713ecb7533e23592412";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+    <!-- 样式 E -->
+</head>
+<body class="login iphone" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0.05);">
+
+{include file="mobile/icon" /}
+
+<!--搜索页-->
+
+<div id="searchPopup" class="search-popup" style="display: none;">
+    <!-- 搜索框 S -->
+    <header class="header">
+
+            <div class="search-area">
+                <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+                <input id="keyword" type="search" name="search" class="search-input" value="" autocomplete="off" placeholder="">
+                <button id="clearSearchKeyword" type="button" class="search-reset" hidden="">
+                    <i class="icon icon-clear"><svg><use xlink:href="#icon-clear"></use></svg></i></button>
+            </div>
+            <a id="closeSearchPopup" href="javascript:" class="search-cancel">取消</a>
+
+    </header>
+    <!-- 搜索框 E -->
+    {include file="mobile/search_input" /}

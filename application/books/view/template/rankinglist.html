@@ -1,0 +1,100 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+<div lmk="rankphby" lmv="顶部榜单">
+    <!--content-->
+    <div class="ranktype">
+        <dl class="typebox">
+            <dt>榜单分类</dt>
+            <dd class="rankClass">
+                <a class="ranka active" key="all">全部</a>
+
+                {volist name='$data' id='vo' }
+                <a class="ranka" key="{$vo.id}">{$vo.name}</a>
+                {/volist}
+
+
+            </dd>
+        </dl>
+
+    </div>
+    <div class="content">
+        <div class="rankall" style="display: block;">
+            <!--rankcount用于计算popBox的方向-->
+
+        <div class="clearfix">
+
+
+            {volist name='$data' id='vo' key='ky' }
+                <dl class="alldl">
+                    <dt>{$vo.name}</dt>
+                    <dd>
+                        <ul>
+                            {volist name='$vo.res' id='lo' key='k' }
+                            <li  class="rankbook"  direct="left">
+                                <i class="chan">{$k}.</i>
+                                <a  target="_blank" href="{:url('/cover/index',['books_id'=>$lo.books_id])}">
+                                    <p class="ft14 fl">{$lo.books_name}</p>
+                                    <p class="clb2 fr">{$lo.books_author}</p>
+                                </a>
+                            </li>
+                            {/volist}
+                        </ul>
+                    </dd>
+                </dl>
+           {if condition="$ky eq 3" }
+            </div>
+                <div class="ranline"></div>
+            <div class="clearfix">
+                {/if}
+
+             {/volist}
+
+        </div>
+
+        </div>
+
+        {volist name='$data' id='vo'  }
+        <div class="ranktypebox" style="display: none" id="box{$vo.id}">
+            <ul class="rankboxul clearfix rankbl">
+                {volist name='$vo.res' id='vi' key='ky' }
+                <li>
+                    <a  target="_blank" href="{:url('/cover/index',['books_id'=>$vi.books_id])}" >
+                        <img src="__BOOKSIMG__/{$vi.books_img}" width="120" height="160">
+                        <h3>{$vi.books_name}</h3>
+                        <p class="rzz">作者：{$vi.books_author}</p>
+                        <p>状态：{eq name="$vi.books_status" value="0"}连载中{else/} 完结{/eq}</p>
+                    </a>
+                    <p>类型：{$types[$vi.books_type]}</p>
+                    <p>更新时间：{$vi.books_time}</p>
+
+                </li>
+                {/volist}
+            </ul>
+        </div>
+        {/volist}
+
+
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".ranka").click(function () {
+            var id = $(this).attr('key');
+            $(".ranka").removeClass('active');
+            $(this).addClass('active');
+            if(id=='all'){
+                $(".rankall").show();
+                $(".ranktypebox").hide();
+            }else{
+                $(".rankall").hide();
+                $(".ranktypebox").hide();
+                $("#box"+id).show();
+            }
+
+        });
+    })
+    
+</script>
+
+{include file="template/footer" /}

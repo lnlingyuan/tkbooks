@@ -1,0 +1,200 @@
+{include file="template/iframe_header" /}
+<blockquote class="layui-elem-quote">
+  注：所有项皆为必填项<br/>
+</blockquote>
+    <div class="x-body">
+        <form class="layui-form layui-form-pane">
+            <input type="hidden" name="rule_id" value="{$data.rule_id}" >
+          <div class="layui-form-item">
+              <label for="L_rule_name" class="layui-form-label">
+                 规则名称
+              </label>
+              <div class="layui-col-md6">
+                  <input type="text" id="L_rule_name" required placeholder="规则名称，示例：笔趣阁"  value="{$data.rule_name}" name="rule_name"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+
+              </div>
+
+          </div>
+
+            <div class="layui-form-item">
+                <label for="L_rule_url" class="layui-form-label">
+                    搜索地址
+                </label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_rule_url" required placeholder="采集站的搜索链接，示例：https://www.23txt.com/search.php?keyword="  value="{$data.rule_url}" name="rule_url"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item layui-col-md7" pane="">
+                <label class="layui-form-label">是否可搜索</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_search"   value="1" title="是" {if condition="$data.is_search eq 1"}checked{/if} >
+                    <input type="radio" name="is_search"    value="0" title="否" {if condition="$data.is_search eq 0"}checked{/if} >
+                </div>
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_search_name" class="layui-form-label"> 搜索结果</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_search_namel" required placeholder="搜索结果小说名选择器，示例：.odd>a"  value="{$data.search_name}" name="search_name"    autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_search_url" class="layui-form-label"> 结果链接</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_search_url" required placeholder="搜索结果小说链接选择器，示例：.odd>a"  value="{$data.search_url}" name="search_url"    autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item layui-col-md7 is_search" pane="">
+                <label class="layui-form-label">编码处理</label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_urlencode" value="1" {if condition="$data.is_urlencode eq 1 "}checked{/if} title="是">
+                    <input type="radio" name="is_urlencode" value="0" {if condition="$data.is_urlencode eq 0"}checked{/if} title="否" >
+                </div>
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_name" class="layui-form-label"> 小说名</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_name"  placeholder="书名选择器，示例：.odd>a"  value="{$data.books_name}" name="books_name"    autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_author" class="layui-form-label"> 小说作者</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_author"  placeholder="作者选择器，示例：.odd>a"  value="{$data.books_author}" name="books_author"    autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_time" class="layui-form-label"> 更新时间</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_time"  placeholder="更新时间选择器，示例：.odd>a"  value="{$data.books_time}" name="books_time"    autocomplete="off" class="layui-input"  >
+                </div>
+
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_type" class="layui-form-label">小说类型</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_type"  placeholder="小说类型选择器，示例：.odd>a"  value="{$data.books_type}" name="books_type"    autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_synopsis" class="layui-form-label">小说简介</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_synopsis"  placeholder="小说简介选择器，示例：.odd>a"  value="{$data.books_synopsis}" name="books_synopsis"    autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item is_search">
+                <label for="L_books_img" class="layui-form-label">小说图片</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_books_img"  placeholder="小说图片选择器，示例：.odd>a"  value="{$data.books_img}" name="books_img"    autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_chapter_name" class="layui-form-label">小说章节</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_chapter_name" required placeholder="小说章节选择器，示例：.odd>a"  value="{$data.chapter_name}" name="chapter_name"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_chapter_url" class="layui-form-label">章节链接</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_chapter_url" required placeholder="章节链接选择器，示例：.odd>a"  value="{$data.chapter_url}" name="chapter_url"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_info_title" class="layui-form-label">小说标题</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_info_title" required placeholder="小说标题选择器，示例：.odd>a"  value="{$data.info_title}" name="info_title"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label for="L_info_content" class="layui-form-label">小说内容</label>
+                <div class="layui-col-md6">
+                    <input type="text" id="L_info_content" required placeholder="小说内容选择器，示例：.odd>a"  value="{$data.info_content}" name="info_content"  lay-verify="required"  autocomplete="off" class="layui-input"  >
+                </div>
+            </div>
+
+
+
+            <div class="layui-form-item">
+                <button class="layui-btn" lay-submit="" lay-filter="edit">立即提交</button>
+            </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+
+          form.on('radio', function(data){
+              console.log(data.elem.name);
+              if(data.elem.name == 'is_search'){
+                  console.log(data.value);
+                  if(data.value==1){
+                      $(".is_search").show();
+                      $(".search_input").attr("lay-verify","required");
+                  }else {
+                      $(".is_search").hide();
+                      $(".search_input").attr("lay-verify","");
+                  }
+              }
+
+          });
+
+        //监听提交
+        form.on('submit(edit)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/rule/editrule',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert("编辑成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+      var is_search= $("input[name='is_search']:checked").val();
+      if(is_search==1){
+          $(".is_search").show();
+          $(".search_input").attr("lay-verify","required");
+      }else {
+          $(".is_search").hide();
+          $(".search_input").attr("lay-verify","");
+      }
+
+    </script>
+
+  </body>
+
+</html>

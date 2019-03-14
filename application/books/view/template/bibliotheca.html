@@ -1,0 +1,124 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+<div class="ranktype">
+    <div class="dlbox">
+
+        <dl class="typebox" lmk="typeClass" lmv="作品类型">
+            <dt>作品类型</dt>
+            <dd>
+                <div class="typediv fr show">
+                    {volist name='types' id='vo' key="k" }
+                    <a class="ranka {if condition='$type_id==$vo.type_id'}active{/if}" href="{$vo.href}"  >{$vo.name}</a>
+                    {/volist}
+
+                </div>
+
+                <a class="ranka_all ranka {notpresent  name='$type_id'}active{/notpresent}" href="{$all_type_href}"  >全部</a>
+            </dd>
+        </dl>
+
+        <dl class="typebox" lmk="updatetime" lmv="更新时间">
+            <dt>更新时间</dt>
+            <dd>
+                {volist name='$time_arr' id='vo' }
+                <a class="{if condition='$books_time==$vo.id'}active{/if}" href="{$vo.href}" >{$vo.name}</a>
+                {/volist}
+
+            </dd>
+        </dl>
+        <dl class="typebox" lmk="bookstate" lmv="更新时间">
+            <dt>作品状态</dt>
+            <dd>
+                {volist name='$status_arr' id='vo' }
+                <a  href="{$vo.href}" class="status {if condition='$books_status==$vo.id'}active{/if}" >{$vo.name}</a>
+                {/volist}
+            </dd>
+        </dl>
+        <div class="changebox">
+            {volist name='txt_arr' id='vo'}
+            {eq name="$txt" value="1"}
+            <a class=' {eq name="$vo.id" value="0"}int_btn{else/}int_tbtn text_btn{/eq} ' href="{$vo.href}"><i></i></a>
+            {else/}
+            <a class=' {eq name="$vo.id" value="0"}int_btn img_btn{else/}int_tbtn{/eq} ' href="{$vo.href}"><i></i></a>
+            {/eq}
+            {/volist}
+        </div>
+    </div>
+</div>
+
+<div class="content">
+
+    <div class="ranktypebox" id="shukubox" lmk="booklist" lmv="搜索书籍列表">
+
+        {empty name='$txt'}
+
+        <ul class="rankboxul clearfix">
+        {volist name='data' id='vo'}
+            <li>
+                <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                    <img class="lazy"  width="120" height="160" src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}"  style="display: block;">
+                    <h3>{$vo.books_name}</h3>
+                    <p class="rzz">作者：{$vo.books_author}</p>
+                    <p>{$type[$vo.books_type]}/
+                        {eq name="$vo.books_status" value="0"}
+                        连载中
+                        {else/}
+                        完结
+                        {/eq}
+                        /65360字</p>
+                    <p class="bib_chapter">最新章节：{$vo.chapter_name}</p>
+                    <p>更新时间：{$vo.books_time}</p>
+                </a>
+            </li>
+
+        {/volist}
+
+        </ul>
+        {else /}
+        <ul class="shukutitle clearfix">
+            <li class="pm">编号</li>
+            <li class="tl">分类</li>
+            <li class="bm">书名</li>
+            <li class="zx">最新章</li>
+            <li class="uz">作者</li>
+            <li class="zt">状态</li>
+            <li class="zs">总字数</li>
+            <li class="gx">更新时间</li>
+        </ul>
+
+        <ul class="listtxtul">
+
+            {volist name='data' id='vo' key='k'}
+            <li>
+                <a class="clearfix" href="{:url('/cover/index',['books_id'=>$vo.books_id])}" >
+                    <span class="pm"><em>{$vo.books_id}.</em></span>
+                    <span class="tl">{$type[$vo.books_type]}</span>
+                    <span class="bm">{$vo.books_name}</span>
+                    <span class="zx">{$vo.chapter_name}</span>
+                    <span class="uz">{$vo.books_author}</span>
+                    <span class="zt">{eq name="$vo.books_status" value="0"}连载中{else/}完结{/eq}</span>
+                    <span class="zs">233756</span>
+                    <span class="gx">{$vo.books_time}</span>
+                </a>
+            </li>
+            {/volist}
+
+        </ul>
+
+        {/empty}
+
+
+    </div>
+</div>
+
+<div class="paging fenye">
+    {$data->render()}
+
+</div>
+
+
+
+
+{include file="template/imglazy" /}
+
+{include file="template/footer" /}

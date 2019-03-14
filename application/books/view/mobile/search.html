@@ -1,0 +1,179 @@
+{include file="mobile/header" /}
+
+<div class="page page-search">
+    <div class="content">
+
+        <header id="header" class="header">
+                <div id="openSearchPopup" class="search-area">
+                    <svg class="icon icon-search"><use xlink:href="#icon-search"></use></svg>
+
+                    <input id="search-kw" type="search" name="search_two" class="search-input" value="{$search_name}" />
+                </div>
+                <a href="javascript:history.go(-1);" class="search-cancel jsBack">取消</a>
+        </header>
+
+
+        <!-- 页面内容 S -->
+
+        <div class="search-content">
+            <div id="searchResult" class="search-detail">
+
+                <!-- 分类搜索结果 E -->
+
+                <!-- 作品搜索结果 S -->
+                <!-- <div class="search-title-bar">
+                    <h5 class="search-title">共<output>61</output>本相关作品</h5>
+                </div> -->
+                <div class="module" id="searchContent">
+
+                    <!-- 书列表 -->
+                    {if condition="empty(count($data))"}
+                    <div class="module"><div class="null-x"><div class="null">没有找到你想要的书</div></div></div>
+                    {else /}
+
+                    <div class="search-filter">
+                        <div id="orders" class="module-filter-header">
+                            <a href="javascript:" class="btn-tag active jsTag" data-value="0">综合</a><a href="javascript:" class="btn-tag jsTag" data-value="9">字数</a><a href="javascript:" class="btn-tag jsTag" data-value="17">点击</a><a href="javascript:" class="btn-tag jsTag" data-value="3">时间</a>
+                        </div>
+                    </div>
+                    <ol id="books-0" class="book-ol book-ol-normal jsBooks" data-cached="true">
+
+                        {volist name="data" id="vo"}
+                        <li class="book-li">
+                            <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="book-layout">
+                                <img src="__BOOKSIMG__/{$vo.books_img}" class="book-cover" >
+                                <div class="book-cell">
+                                    <div class="book-title-x">
+
+                                        <h4 class="book-title">{$vo.books_name}<mark></mark></h4>
+                                    </div>
+                                    <p class="book-desc">{$vo.books_synopsis}</p>
+                                    <div class="book-meta">
+                                        <div class="book-meta-l">
+                                <span class="book-author">
+                                    <svg class="icon icon-human"><title>作者</title><use xlink:href="#icon-human"></use></svg>{$vo.books_author}
+                                </span>
+                                        </div>
+                                        <div class="book-meta-r">
+                                <span class="tag-small-group origin-right">
+                                    <em class="tag-small lightgreen">{$types[$vo.books_type]}</em>
+                                    <em class="tag-small lightblue">{if condition="($vo.books_status == 1)"}完结{else /} 连载{/if}</em>
+                                    <em class="tag-small smallblue">300.78万</em>
+                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+
+                        {/volist}
+
+
+
+                    </ol>
+
+                    {/if}
+
+
+                    <div class="module-bar jsInfiniteScroll" style="display: none;" data-scroller-rel="" id="infiniteScroller-0">正在加载中<dot>...</dot></div>
+
+                </div>
+                <!-- 作品搜索结果 E -->
+
+
+            </div>
+        </div>
+
+        <!-- 页面内容 E -->
+    </div>
+</div>
+<input type="hidden" value="1" name="page" />
+<input type="hidden" value="{$search_name}" name="books_name" />
+<script>
+    $(function () {
+
+        keywordHighlight("searchContent","{$search_name}");
+
+        function getSearch_tow() {
+            var search = $("input[name='search_two']").val();
+            if(search){
+                window.location.href = "/Search/index/books_name/"+search;
+            }
+        }
+
+        //回车快捷查询
+        $(".search-area").keypress(function (e) {
+            var keyCode = e.keyCode ? e.keyCode : e.which ? e.which : e.charCode;
+            if (keyCode == 13){
+                getSearch_tow();
+            }
+        });
+
+
+
+
+    });
+
+    //定义事件锁，防止重复请求
+    var is_running = true;
+
+    $(window).scroll(function() {
+
+        var foot = $(document).scrollTop()+1;
+
+        if ( foot >= $(document).height() - $(window).height()) {
+
+            if(is_running == true) {
+
+                is_running = false;
+
+                var page = ($("input[name='page']").val())*1+1;
+                var books_name = $("input[name='books_name']").val();
+
+                $.post("/search/nextResult",{page:page,books_name:books_name},function(result){
+
+                    var data = result.res;
+
+                    if(data.length>0){
+
+                        $(".jsInfiniteScroll").show();
+
+                        var html = '';
+                        $.each(data,function (i,e) {
+                            var url = "/cover/index/books_id/"+e.books_id+".html";
+
+                            html = '<li class="book-li"><a href="'+url+'" class="book-layout">';
+                            html +='<img src="__BOOKSIMG__/'+e.books_img+'" class="book-cover">';
+                            html +='<div class="book-cell"><div class="book-title-x"><h4 class="book-title">'+e.books_name+'</h4></div>';
+                            html +='<p class="book-desc">'+e.books_synopsis+'</p>';
+                            html +='<div class="book-meta"><div class="book-meta-l"><span class="book-author"><svg class="icon icon-human"><title>作者</title><use xlink:href="#icon-human"></use></svg>'+e.books_author+'</span></div>';
+                            html +='<div class="book-meta-r"><span class="tag-small-group origin-right">';
+                            html +='<em class="tag-small lightgreen">'+e.books_type+'</em>';
+                            html +='<em class="tag-small lightblue">'+e.books_status+'</em>';
+                            html +='<em class="tag-small smallblue">300.78万</em>';
+                            html +='</span></div></div></div></a></li>';
+
+                            $(".jsBooks").append(html);
+                        });
+                        //文字高亮
+                        keywordHighlight("searchContent","{$search_name}");
+                        $("input[name='page']").val(page);
+                        $(".jsInfiniteScroll").hide();
+                        is_running = true;
+
+                    }
+
+
+                }, "json");
+
+            }
+        }
+
+    });
+
+
+</script>
+
+
+
+{include file="mobile/header" /}

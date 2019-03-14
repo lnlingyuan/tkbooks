@@ -1,0 +1,128 @@
+{include file="template/iframe_header" /}
+
+    <div class="x-body">
+        <form class="layui-form">
+            <blockquote class="layui-elem-quote layui-quote-nm">勾选权限时，勾选二级栏目，需将上级栏目一同勾选，否则该权限将无法生效</blockquote>
+          <div class="layui-form-item">
+              <label for="L_username" class="layui-form-label">
+                  <span class="x-red">*</span>管理员名称
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_adminname" name="admin_name" required="" lay-verify="nikename" autocomplete="off" class="layui-input" value="" >
+              </div>
+
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>将会成为您唯一的登入名
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_password" class="layui-form-label">
+                  <span class="x-red">*</span>密码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="password" id="L_pwd" name="admin_password" required="" lay-verify="required" value=""
+                         autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"> <span class="x-red">*</span>权限范围</label>
+                <div class="layui-input-block">
+                    {volist name="meun" id="vo"}
+                    <input type="checkbox" name="admin_power[]" lay-skin="primary" title="{$vo}" value="{$vo}"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>{$vo}</span><i class="layui-icon layui-icon-ok"></i></div>
+                    {/volist}
+                </div>
+            </div>
+            <div class="layui-form-item">
+              <label for="L_admin_describe" class="layui-form-label">
+                  <span class="x-red">*</span>描述
+              </label>
+              <div class="layui-input-inline">
+                  <textarea type="text" name="admin_describe" lay-verify="required" autocomplete="off" class="layui-textarea"></textarea>
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_status" class="layui-form-label">
+                    <span class="x-red">*</span>状态
+                </label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_disable" value="0" title="启用" checked >
+                    <input type="radio" name="is_disable" value="1" title="禁用" >
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+        //自定义验证规则
+        form.verify({
+            nikename: function (value) {
+                if (value.length < 2) {
+                    return '管理员名称至少得2个字符';
+                }
+            }
+        });
+        //监听提交
+        form.on('submit(add)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/user/adminAdd',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php
+                  layer.alert("新增成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+      layui.use('upload', function(){
+          var upload = layui.upload;
+
+          //执行实例
+          var uploadInst = upload.render({
+              elem: '#test1' //绑定元素
+              ,url: '/admin.php/user/upload_photo' //上传接口
+              ,done: function(res){
+                  //上传完毕回调
+                  if(res.code=='200'){
+                      var html = '<img src="'+res.res+'" style="width: 130px;margin-bottom: 10px;" />';
+                      $(".file_photo").html(html);
+
+                      $("input[name='user_img']").val(res.res);
+                  }
+              }
+              ,error: function(){
+                  //请求异常回调
+              }
+          });
+      });
+
+
+  </script>
+
+  </body>
+
+</html>

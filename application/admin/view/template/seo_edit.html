@@ -1,0 +1,111 @@
+{include file="template/iframe_header" /}
+<blockquote class="layui-elem-quote">
+    注：模块标识为 <span class="x-red">控制器名/方法名</span>。如：rankinglist/index<br>
+</blockquote>
+    <div class="x-body">
+
+        <form class="layui-form">
+            <input type="hidden" id="L_action" name="action" value="edit" >
+            <input type="hidden" name="seo_id" value="{$data.seo_id}">
+          <div class="layui-form-item">
+              <label for="L_seo_module" class="layui-form-label">
+                  <span class="x-red">*</span>模块标识
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_seo_module" name="seo_module" required="" lay-verify="required"  autocomplete="off" class="layui-input" value="{$data.seo_module}" >
+              </div>
+
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>标识是唯一的，不可重复
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_seo_remark" class="layui-form-label">
+                  <span class="x-red">*</span>模块备注
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="L_seo_remark" name="seo_remark" required="" lay-verify="required" value="{$data.seo_remark}" autocomplete="off" class="layui-input">
+              </div>
+          </div>
+            <div class="layui-form-item">
+              <label for="L_title" class="layui-form-label">
+                  <span class="x-red">*</span>title
+              </label>
+              <div class="layui-input-block">
+                  <textarea type="text" name="seo_title" lay-verify="required" autocomplete="off" class="layui-textarea">{$data.seo_title}</textarea>
+              </div>
+          </div>
+            <div class="layui-form-item">
+                <label for="L_keywords" class="layui-form-label">
+                    <span class="x-red">*</span>keywords
+                </label>
+                <div class="layui-input-block">
+                    <textarea type="text" name="seo_keywords" lay-verify="required" autocomplete="off" class="layui-textarea">{$data.seo_keywords}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_description" class="layui-form-label">
+                    <span class="x-red">*</span>description
+                </label>
+                <div class="layui-input-block">
+                    <textarea type="text" name="seo_description" lay-verify="required" autocomplete="off" class="layui-textarea">{$data.seo_description}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_status" class="layui-form-label">
+                    <span class="x-red">*</span>状态
+                </label>
+                <div class="layui-input-inline">
+                    <input type="radio" name="is_disable" value="0" title="启用" {if condition="$data.is_disable eq 0" }checked{/if}>
+                    <input type="radio" name="is_disable" value="1" title="禁用" {if condition="$data.is_disable eq 1" }checked{/if}>
+                </div>
+            </div>
+
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="edit" lay-submit="">
+                  保存
+              </button>
+          </div>
+      </form>
+    </div>
+    <script>
+      layui.use(['form','layer'], function(){
+          $ = layui.jquery;
+        var form = layui.form
+        ,layer = layui.layer;
+      
+
+        //监听提交
+        form.on('submit(edit)', function(data){
+          console.log(form);
+
+          $.post('/admin.php/settings/seoEdit',data.field,function (e) {
+              if(e.code==1){
+                  //发异步，把数据提交给php000
+                  layer.alert("编辑成功", {icon: 6},function () {
+                      // 获得frame索引
+                      var index = parent.layer.getFrameIndex(window.name);
+                      //关闭当前frame
+                      parent.layer.close(index);
+                  });
+              }else{
+                  layer.msg(e.msg);
+              }
+          });
+
+          return false;
+        });
+        
+        
+      });
+
+
+
+
+  </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,46 @@
+{include file="mobile/header" }
+<link rel="stylesheet" href="__CSS__/mobile_user.css">
+
+
+<div class="page page-level-detail">
+    <div class="content">
+
+
+        <!-- 公用头部 S -->
+        <header id="header" class="header">
+            <a href="javascript:history.go(-1)" class="header-back jsBack">
+                <svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+            </a>
+            <h1 class="header-back-title">消息中心</h1>
+            <div class="header-operate">
+                <a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+                    <svg><use xlink:href="#icon-search"></use></svg>
+                </a>
+                <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+            </div>
+        </header>
+
+        {include file="mobile/more_navigation" /}
+
+        <!-- 公用头部 E -->
+
+
+
+        <!-- 页面内容 S -->
+        <div class="detail-module">
+            <ol id="message" class="book-ol message-detail-ol" data-type="3">
+
+
+
+
+
+                <div class="null-x"><div class="null">暂无消息</div></div>
+
+
+            </ol>
+
+            <div class="module-bar jsInfiniteScroll" data-scroller-rel="" hidden="" id="infiniteScroller-0">正在加载中<dot>...</dot></div>
+
+        </div>
+    </div></div>
+{include file="mobile/footer" }

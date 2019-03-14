@@ -1,0 +1,209 @@
+{include file="template/iframe_header" /}
+<div class="x-body">
+    <div class="layui-row">
+        <form action="booksList" class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="开始日" name="start_time" id="start">
+            <input class="layui-input" placeholder="截止日" name="end_time" id="end">
+            <input type="text" name="books_name"  placeholder="请输入书籍名" value="{$res.books_name}" autocomplete="off" class="layui-input">
+            <input type="text" name="books_author"  placeholder="请输入作者名" value="{$res.books_author}" autocomplete="off" class="layui-input">
+            <input type="text" name="books_url"  placeholder="请输入源地址" value="{$res.books_url}" autocomplete="off" class="layui-input">
+            <div class="layui-inline">
+                <select name="books_type" >
+                    <!--<option value="">{empty name='$res.books_type' }请选择类型{else /}{$types[$res.books_type]}{/empty}</option>-->
+                    <option value="">请选择类型</option>
+                    {volist name="$type" id="vo"}
+                    <option value="{$vo.type_id}" {if condition="$res.books_type eq $vo.type_id" }selected{/if} >{$vo.type_name}</option>
+                    {/volist}
+                </select>
+
+            </div>
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick='x_admin_show("添加用户","{:url(\'books/addBooks'\)}")'><i class="layui-icon"></i>添加</button>
+        {if condition="$admin_id eq 1 " }
+        <button class="layui-btn layui-btn-danger" onclick="delbooks()"><i class="layui-icon"></i>清空小说</button>
+        {/if}
+        <span class="x-right" style="line-height:40px">共有书籍：{$count} 本</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>书籍名称</th>
+            <th>作者</th>
+            <th>更新时间</th>
+            <th>类型</th>
+            <th>状态</th>
+            <th>操作</th></tr>
+        </thead>
+        <tbody>
+
+        {volist name='$data' id='vo' }
+        <tr>
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{$vo.books_id}'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{$vo.books_id}</td>
+            <td>{$vo.books_name}</td>
+            <td>{$vo.books_author}</td>
+            <td>{$vo.books_time}</td>
+            <td>{$types[$vo.books_type]}</td>
+            <td class="td-status">
+                {if condition="$vo.books_status==0"}
+                <span  >连载</span>
+                {else /}
+                <span  class="layui-btn-disabled">完结</span>
+                {/if}
+            </td>
+
+            <td class="td-manage">
+                <!--<a onclick="member_stop(this,'10001')" href="javascript:;" is_disable="{$vo.books_status}" user_id="{$vo.books_id}" title="启用">-->
+                    <!--<i class="layui-icon">&#xe601;</i>-->
+                <!--</a>-->
+                <a title="编辑"  onclick="x_admin_show('编辑','{:url(\'books/edit'\,[\'books_id'\=>$vo.books_id])}')" href="javascript:;">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a onclick="x_admin_show('最新章节','{:url(\'books/books_chapter'\,[\'books_id'\=>$vo.books_id])}')" title="最新章节" href="javascript:;">
+                    <i class="layui-icon">&#xe621;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'{$vo.books_id}')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+{/volist}
+        </tbody>
+    </table>
+
+
+
+    <div class="page">
+        <div>
+            {$data->render()}
+        </div>
+    </div>
+
+</div>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+
+    /*用户-停用*/
+    function member_stop(obj,id){
+        layer.confirm('确认要停用吗？',function(index){
+
+
+            var is_disable = $(this).attr("class");
+            var user_id = $(this).attr("user_id");
+            console.log(is_disable);
+
+            $.post("",{is_disable:is_disable},function () {
+
+            });
+
+            if($(obj).attr('title')=='启用'){
+
+                //发异步把用户状态进行更改
+                $(obj).attr('title','停用');
+                $(obj).find('i').html('&#xe62f;');
+
+                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+                layer.msg('已停用!',{icon: 5,time:1000});
+
+            }else{
+                $(obj).attr('title','启用');
+                $(obj).find('i').html('&#xe601;');
+
+                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+                layer.msg('已启用!',{icon: 5,time:1000});
+            }
+
+        });
+    }
+
+    /*用户-删除*/
+    function member_del(obj,id){
+        layer.confirm('确认要删除吗？',function(index){
+            $.post('/admin.php/books/delete',{books_id:id},function (e) {
+                if(e.code==1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.msg(e.msg,{icon:1,time:1000});
+                }else{
+                    layer.msg(e.msg,{icon:2,time:1000});
+                }
+
+            });
+
+
+        });
+    }
+
+    /*清空小说*/
+    function delbooks(){
+        layer.confirm('确认要清空小说吗？',function(index){
+            $.post('/admin.php/books/delAllBooks','',function (e) {
+                if(e.code==1){
+                    //发异步删除数据
+                    layer.msg(e.msg,{icon:1,time:1000});
+                    location.replace(location.href)
+                }else{
+                    layer.msg(e.msg,{icon:2,time:1000});
+                }
+
+            });
+
+
+        });
+    }
+
+
+
+    function delAll (argument) {
+
+        var books_ids = tableCheck.getData();
+
+        layer.confirm('确认要删除吗？',function(index){
+            //捉到所有被选中的，发异步进行删除
+            $.post('/admin.php/books/delAllList',{books_ids:books_ids},function (e) {
+                if(e.code==1){
+                    //发异步删除数据
+                    layer.msg(e.msg,{icon:1,time:1000});
+                }else{
+                    layer.msg(e.msg,{icon:2,time:1000});
+                }
+
+            });
+
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+    }
+
+    $(function () {
+        $(".layui-anim-upbit>dd:end").click();
+    });
+
+
+    
+</script>
+
+</body>
+
+</html>

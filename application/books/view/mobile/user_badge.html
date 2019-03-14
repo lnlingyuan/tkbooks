@@ -1,0 +1,379 @@
+{include file="mobile/header" }
+<link rel="stylesheet" href="__CSS__/mobile_user.css">
+<style>
+    @charset "UTF-8";
+    /* 个人中心的一些样式 */
+    .page-badge .header[open] {
+        color: #1A1A1A; }
+
+    .page-badge .header .header-back-title {
+        color: #1A1A1A; }
+
+    .page-badge .header a {
+        color: #7ED321; }
+
+    .badge-ul-box {
+        display: flex;
+        display: -webkit-box;
+        display: box;
+        padding: 0.9375rem 0.6rem;
+        font-size: 0px;
+        font-size: -webkit-calc(0px + 0px);
+        line-height: 0;
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        box-pack: justify; }
+
+    .badge-logo-qidai {
+        margin-left: 0.6rem;
+        margin-top: 0.9375rem; }
+
+    .badge-logo-li {
+        line-height: 0.875rem;
+        position: relative;
+        display: block;
+        width: 5rem;
+        vertical-align: top;
+        padding: 0 0.9375rem; }
+
+    .badge-logo-box {
+        position: relative;
+        display: block;
+        margin: 0 auto; }
+
+    .badge-pic {
+        width: 4.375rem;
+        height: 4.375rem;
+        margin: 0 auto;
+        margin-bottom: 0.25rem;
+        display: block; }
+
+    .badge-h {
+        font-size: 0.875rem;
+        text-align: center;
+        height: 1.125rem;
+        line-height: 1.125rem;
+        overflow: hidden;
+        color: #111111; }
+
+    @media screen and (max-width: 320px) {
+        .badge-logo-li {
+            width: 4.25rem;
+            line-height: 0.875rem;
+            position: relative;
+            display: block;
+            vertical-align: top;
+            padding: 0 0.8rem; }
+        .badge-pic {
+            width: 4.25rem;
+            height: 4.25rem;
+            margin-bottom: 0.25rem;
+            margin: 0 auto;
+            display: block; }
+        .badge-wrapper {
+            min-height: 18.125rem; } }
+
+    .panel-dialog-success {
+        position: relative;
+        padding-top: 2rem;
+        box-shadow: 0 0.375rem 0.5rem rgba(106, 209, 67, 0.3); }
+
+    .tip-success {
+        display: block;
+        width: 6.875rem;
+        height: 6.875rem;
+        background: cover;
+        position: absolute;
+        left: 50%;
+        margin-left: -3.3125rem;
+        top: -3.75rem; }
+
+    .green {
+        color: #6AD143; }
+
+    .success-title {
+        color: #111111;
+        font-size: 1.125rem; }
+
+    .success-content {
+        color: #333333;
+        font-size: 1rem; }
+
+    .panel-main {
+        padding-bottom: 1rem;
+        line-height: 1rem; }
+
+    .panel-footer .btn-blank {
+        width: 15.25rem;
+        height: 2.75rem;
+        display: block;
+        color: #6AD143;
+        background: #fff;
+        -webkit-border-radius: 1.375rem;
+        -moz-border-radius: 1.375rem;
+        -ms-border-radius: 1.375rem;
+        -o-border-radius: 1.375rem;
+        border-radius: 1.375rem;
+        margin: 1rem auto;
+        border: 1px solid #6AD143; }
+
+    .panel-footer::before {
+        border: 0; }
+
+    .badge-time {
+        position: relative; }
+
+    .badge-main {
+        padding: 1.75rem 1.5rem 0.5rem; }
+
+    .line-title {
+        display: block;
+        color: #111111;
+        font-size: 1.125rem;
+        text-align: center;
+        height: 1.125rem;
+        margin-bottom: 0.5rem; }
+
+    .line-time {
+        display: block;
+        color: #999999;
+        font-size: 0.75rem;
+        text-align: center;
+        height: 0.75rem;
+        margin-bottom: 0.9375rem; }
+
+    .badge-line {
+        width: 100%;
+        background-color: #D8D8D8;
+        border-radius: 0.0625rem 0 0 0.0625rem;
+        height: 0.125rem; }
+
+    .badge-cover-line {
+        width: 45%;
+        max-width: 100%;
+        background-color: #6AD143;
+        position: absolute;
+        border-radius: 0.0625rem 0 0 0.0625rem;
+        height: 0.125rem; }
+
+    .badge-line-number {
+        margin-top: 0.5rem;
+        display: flex;
+        display: -webkit-box;
+        display: box;
+        font-size: 0px;
+        font-size: -webkit-calc(0px + 0px);
+        line-height: 0;
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        box-pack: justify; }
+
+    .number-a {
+        height: 0.625rem;
+        width: 0rem;
+        position: relative;
+        display: block;
+        vertical-align: top; }
+    .number-a:before {
+        content: '';
+        line-height: 0.5rem;
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+        margin: -0.8125rem auto 0.125rem;
+        text-align: center;
+        color: #D8D8D8;
+        background: #D8D8D8;
+        position: relative; }
+    .number-a.active:before {
+        color: #6AD143;
+        background: #6AD143; }
+    .number-a.active .number-i {
+        color: #333333; }
+
+    .number-i {
+        font-size: 0.625rem;
+        line-height: 1;
+        width: 1.375rem;
+        text-align: center;
+        margin-left: -0.5rem;
+        color: #999999; }
+
+    .badge-nextlevel {
+        font-size: 0.75rem;
+        color: #333;
+        margin-top: 0.75rem; }
+
+    i[class*="icon-"] {
+        display: inline-block; }
+
+    .badge-wrapper {
+        min-height: 450px;
+        min-height: calc(100vh - 11.75rem); }
+
+    .badge-footer {
+        background: #fff; }
+    .badge-footer-icon {
+        display: block;
+        text-align: center; }
+    .badge-footer-count {
+        display: block;
+        text-align: center;
+        font-size: 0.875rem; }
+    .badge-footer-des {
+        display: block;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #8C8C8C; }
+
+</style>
+
+<div class="page page-level-detail">
+    <div class="content">
+
+
+        <!-- 公用头部 S -->
+        <header id="header" class="header">
+            <a href="javascript:history.go(-1)" class="header-back jsBack">
+                <svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+            </a>
+            <h1 class="header-back-title">我的勋章</h1>
+            <div class="header-operate">
+                <a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+                    <svg><use xlink:href="#icon-search"></use></svg>
+                </a>
+                <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+            </div>
+        </header>
+
+        {include file="mobile/more_navigation" /}
+
+        <!-- 公用头部 E -->
+
+
+
+        <!-- 页面内容 S -->
+
+        <div class="module module-merge badge-wrapper" id="elBadgeWrapper">
+
+
+
+
+            <ul class="badge-ul-box">
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1516796292000">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/0.png" class="badge-pic">
+
+                        <p class="badge-h">打榜壕杰</p>
+                    </a>
+                </li>
+
+
+
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1511578186000">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/1.png" class="badge-pic">
+
+                        <p class="badge-h">粉丝达人</p>
+                    </a>
+                </li>
+
+
+
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1507603786413">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/2.png" class="badge-pic">
+
+                        <p class="badge-h">一掷千金</p>
+                    </a>
+                </li>
+
+            </ul>
+
+
+
+
+            <ul class="badge-ul-box">
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1507603874151">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/3.png" class="badge-pic">
+
+                        <p class="badge-h">正版卫士</p>
+                    </a>
+                </li>
+
+
+
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1507603915887">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/4.png" class="badge-pic">
+
+                        <p class="badge-h">指点江山</p>
+                    </a>
+                </li>
+
+
+
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1507603961397">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/5.png" class="badge-pic">
+
+                        <p class="badge-h">持之以恒</p>
+                    </a>
+                </li>
+
+            </ul>
+
+
+
+
+            <ul class="badge-ul-box">
+
+                <li class="badge-logo-li jsBadge" data-logo="badge-1507604040485">
+                    <a href="javascript:" class="badge-logo-box">
+
+                        <img src="/static/images/badge/6.png" class="badge-pic">
+
+                        <p class="badge-h">嗜书如命</p>
+                    </a>
+                </li>
+
+
+
+                <li class="badge-logo-li">
+                    <a href="javascript:" class="badge-logo-box">
+                        <img src="/static/images/badge/7.png" alt="徽章" class="badge-pic">
+                        <p class="badge-h">敬请期待</p>
+                    </a>
+                </li>
+                <li class="badge-logo-li"></li>
+
+
+
+
+            </ul></div>
+
+        <div class="badge-footer">
+            <span class="badge-footer-icon"><i class="icon-center-badgeicon"></i></span>
+            <span class="badge-footer-count">已收集 0/7</span>
+            <span class="badge-footer-des">所有勋章规则统计自2017年12月4日开始计算</span>
+        </div>
+    </div></div>
+{include file="mobile/footer" }

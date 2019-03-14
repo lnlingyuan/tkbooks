@@ -1,0 +1,58 @@
+
+<!-- 公用底部 S -->
+<footer class="footer">
+
+
+
+
+    <!-- 底部信息 S -->
+    <div class="footer-link">
+        <a href="{:url('/index/index')}" class="footer-link-a dark pay-url-link">首页</a>
+        <a href="javascript:" class="footer-link-a dark openshelf" >书架</a>
+        <a href="{:url('/login/register')}" class="footer-link-a dark resgin">注册</a>
+        <a href="javascript:;" class="footer-link-a dark jsDownloadLink">退出登陆</a>
+    </div>
+    <div class="footer-copy">
+        copyright © 2002-2018 {$module_data.name}
+    </div>
+    <!-- 底部信息 S -->
+</footer>
+
+
+
+
+<!-- 返回顶部悬浮 -->
+<a href="#" class="footer-backtop-circle jsBackToTop" title="返回顶部" style="opacity: 0; visibility: hidden;"><svg class="icon icon-backtop"><use xlink:href="#icon-backtop"></use></svg></a>
+
+
+<script>
+    //退出登陆
+    $(".jsDownloadLink").click(function () {
+        //询问框
+        layer.open({
+            content: '您确定要退出登陆吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                $.post('/login/loginOut','',function (e) {
+                    layer.open({
+                        content: e.msg
+                        ,skin: 'msg'
+                        ,time: 2 //2秒后自动关闭
+                    });
+                    if(e.code==1){
+                        setTimeout(function () {
+                            window.location.href='/login/index';
+                        },2000);
+                    }
+                },"json");
+                layer.close(index);
+            }
+        });
+
+    });
+
+
+</script>
+
+
+</body></html>

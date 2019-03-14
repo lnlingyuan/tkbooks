@@ -1,0 +1,197 @@
+{include file="mobile/header" }
+<style>
+	.ell{
+		width: 80%;
+	}
+</style>
+<div class="page page-bookshelft-my">
+	<div class="content">
+		<!-- 公用头部 S -->
+		<header id="header" class="header">
+		<a href="javascript:history.go(-1)" class="header-back jsBack">
+		<svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+		</a>
+		<nav class="btn-group btn-group-small">
+		<h3 class="btn-group-cell" role="navigation" title="已选择"><a href="/shelf/index" class="btn-tab active">我的书架</a></h3>
+		<h3 class="btn-group-cell" role="navigation" title=""><a href="/shelf/mobileHostory" class="btn-tab">最近阅读</a></h3>
+		</nav>
+		<div class="header-operate">
+			<a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+			<svg><use xlink:href="#icon-search"></use></svg>
+			</a>
+			<a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+		</div>
+		</header>
+		{include file="mobile/more_navigation" /}
+
+		<!-- 公用头部 E -->
+		<!-- 页面内容 S -->
+		<header id="editHeader" class="header" hidden="">
+		<div class="header mybook-edit-header">
+			<a href="javascript:" id="btnEditAll" class="header-opt-a-l">全选</a>
+			<a href="javascript:" id="btnEditCancel" class="header-opt-a-r">取消</a>
+			<h3 class="header-title">共<span class="book-count-current">5</span>本</h3>
+		</div>
+		</header>
+		<!--<div class="module module-merge">-->
+			<!--<div id="editBtnHeader" class="mybook-module-header">-->
+				<!--<header class="mybook-default-header" style="">-->
+				<!--<a href="javascript:" class="header-opt-a-l">共<span class="book-count-current">5</span>本</a>-->
+				<!--<a href="javascript:" id="bookEditBtn" class="header-opt-a-r">编辑</a>-->
+				<!--</header>-->
+			<!--</div>-->
+			<!-- 列表内容 -->
+			<ol id="bookEditOl" class="book-ol book-ol-progress" data-sort-type="2" data-count-num="5" data-page-size="10">
+
+
+
+				{if condition="$has eq false"}
+				<!-- 加载更多 -->
+				<span class="list-split-1">
+
+				<!-- 单本书 -->
+				{volist name="data" id="vo"}
+				<li class="book-li ">
+				<i class="radio"><svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg></i>
+				<div class="book-layout">
+					<div class="rel">
+						<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="mybook-to-detail">
+						<img src="__BOOKSIMG__/{$vo.books_img}" class="book-cover" alt="九零军嫂有空间">
+						</a>
+						<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="book-title-x">
+						<h4 class="book-title">{$vo.books_name}
+						<span class="tag-small-group">
+						</span>
+						</h4>
+						</a>
+					</div>
+					<!-- 继续阅读 -->
+					<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="mybook-to-goon">
+					<div class="book-title-x">
+						<div class="book-title-r">
+							<span class="gray">立即阅读</span><svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg>
+						</div>
+					</div>
+					<div class="book-meta">
+						<p class="ell">
+							<svg class="icon icon-human"><use xlink:href="#icon-human"></use></svg>{$vo.books_author} | {$types[$vo.books_type]}
+						</p>
+					</div>
+					</a>
+					<div class="rel">
+						<!-- 最新章节 -->
+						<a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" class="mybook-to-new">
+						<div class="book-meta">
+<time class="book-meta-r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</time>
+							<p class="ell">
+								<i class="dot lightgreen"></i>阅读至：{empty name="$vo.history_name"} 暂未阅读{else /}{$vo.history_name}{/empty}
+							</p>
+						</div>
+						</a>
+					<a href="javascript:;" class="mybook-to-del" books_id="{$vo.books_id}">删除</a>
+					</div>
+
+				</div>
+				</li>
+ 				{/volist}
+				</span>
+				<input type="hidden" value="1" name="page" />
+				<script>
+
+                    //定义事件锁，防止重复请求同个章节
+                    var is_running = true;
+
+                    $(window).scroll(function() {
+
+
+
+                        var foot = $(document).scrollTop()+1;
+
+                        if ( foot >= $(document).height() - $(window).height()) {
+
+                            if(is_running == true) {
+
+                                is_running = false;
+
+                                var page = ($("input[name='page']").val())*1+1;
+
+                                $.post("/shelf/nextBooks",{page:page},function(result){
+
+                                    var data = result.data;
+
+                                    if(data.length>0){
+
+
+                                        var html = '';
+                                        $.each(data,function (i,e) {
+                                            var url = "/cover/index/books_id/"+e.books_id+".html";
+                                            if(e.history_name == null){
+                                                var history_name = '暂未阅读';
+
+                                            }else{
+                                                var history_name = e.history_name;
+                                            }
+                                            var type = '{$types[$vo.books_type]}';
+                                            html = ' <li class="book-li "><i class="radio"><svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg></i><div class="book-layout"><div class="rel">';
+                                            html +=' <a href="'+url+'" class="mybook-to-detail">';
+                                            html +='<img src="__BOOKSIMG__/'+e.books_img+'" class="book-cover" ></a>' ;
+                                            html +='<a href="'+url+'" class="book-title-x"><h4 class="book-title">'+e.books_name+'<span class="tag-small-group"></span></h4></a></div>';
+                                            html +='<a href="'+url+'" class="mybook-to-goon"> <div class="book-title-x"><div class="book-title-r"><span class="gray">立即阅读</span><svg class="icon icon-arrow-r"><use xlink:href="#icon-arrow-r"></use></svg></div></div>';
+
+                                            html +='<div class="book-meta"><p class="ell"><svg class="icon icon-human"><use xlink:href="#icon-human"></use></svg>'+e.books_author+' | '+type+'</p></div></a>';
+                                            html +='<div class="rel"><a href="'+url+'" class="mybook-to-new"><div class="book-meta"><p class="ell"><i class="dot lightgreen"></i>阅读至：'+history_name+'</p></div></a><a href="javascript:;" class="mybook-to-del" books_id="'+e.books_id+'">删除</a></div></div></li>';
+
+                                            $(".list-split-1").append(html);
+                                        });
+
+                                        $("input[name='page']").val(page);
+                                        is_running = true;
+
+                                    }
+
+
+                                }, "json");
+
+                            }
+                        }
+
+                    });
+
+                    $("#bookEditOl").on("click",".mybook-to-del",function () {
+                        var books_id = $(this).attr('books_id');
+                        layer.open({
+                            content: '您确定要删除吗？'
+                            ,btn: ['确定', '取消']
+                            ,yes: function(index){
+
+                                $.post('/shelf/deleteBooks',{books_id:books_id},function (e) {
+                                    layer.open({
+                                        content: e.msg
+                                        ,skin: 'msg'
+                                        ,time: 2 //2秒后自动关闭
+                                    });
+                                    if(e.code==1){
+                                        setTimeout(function () {
+                                            window.location.href=e.url;
+                                        },2000);
+                                    }
+                                });
+                                layer.close(index);
+                            }
+                        });
+                    });
+
+				</script>
+
+				{else /}
+				<div class="null">你的书架是空的</div>
+				{/if}
+			</ol>
+		</div>
+
+
+	</div>
+</div>
+
+
+{include file="mobile/footer" /}

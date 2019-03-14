@@ -1,0 +1,264 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+
+<div class="cover-page">
+
+        <!--content-->
+        <div class="cover-top">
+                <div class="covertbox">
+                        <div class="cover-nav">
+                                <p>&gt;
+                                        <a href="{:url('/bibliotheca/index',['type_id'=>$data.books_type])}">{$types[$data.books_type]}</a> &gt; <span> {$data.books_name}</span></p>
+                        </div>
+
+                        <div class="coverfm clearfix">
+                                <div class="coverimg fl">
+                                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$data.books_img}" class="cover_img">
+                                </div>
+                                <div class="coverinfo" lmk="bookmeta" lmv="书籍meta信息">
+                                        <h3> {$data.books_name}</h3>
+                                        <p class="author">作者：<span>{$data.books_author}</span></p>
+                                        <p class="part">
+                                                <span class="synopsis">{$data.books_synopsis}</span>
+                                                <a class="zk" href="javascript:;"></a>
+
+                                        </p>
+                                        <p class="all" style="display: none">{$data.books_synopsis}<a class="sq" href="javascript:;"></a>
+                                        </p>
+
+                                        <div class="cobtnbox">
+                                                {empty name="$history_url"}
+                                                <a class="goread"  href="{:url('/catalog/index',['books_id'=>$books_id])}" >开始阅读</a>
+                                                {else /}
+                                                <a class="goread"  href="{:url('/info/index',['books_id'=>$books_id,'chapter_url'=>$history_url])}" >继续阅读</a>
+                                                {/empty}
+
+
+   <a class="js_chapter_btn_cover" href="{:url('/catalog/index',['books_id'=>$books_id])}" lmk="bookmeta-catalog" lmv="目录" urltrue="true" lmurl="#"><span class="glyphicon glyphicon-th-list"></span>&nbsp;目录</a>
+                                                {if condition="($books_has == 1)"}
+<a class="addbksj yiadd" href="javascript:;" >已加入书架</a>
+                                                {else /}
+                                                <a class="addbksj" href="javascript:;" >+加入书架</a>
+                                                {/if}
+
+                                                <!-- <div class="js_chapter_btn_cover"></div> -->
+                                        </div>
+                                        <div class="infospan">
+                                                <span>分类：{$types[$data.books_type]}</span>
+                                                <span>字数：6334457字</span>
+                                                <span>状态：{$data.books_status}</span>
+                                                <span style="margin-right:0;">更新时间：{$data.books_time}</span>
+                                        </div>
+                                </div>
+                        </div>
+
+                </div>
+        </div>
+
+
+
+
+        <!-- 评论相关 -->
+        <div class="cca-all-comment" style="margin-top: 80px;display: table;margin-left: auto;margin-right: auto;">
+
+                <div class="cover-chapter-c">
+                        <div class="cover-chapter-left">
+                            <div id="new" class="burl">
+
+                            </div>
+
+                                <div class="comment-cover" lmk="comment" lmv="评论">
+                                        <div class="title-comment-cover">
+                                                <div class="title-comment-cover-left">
+                                                        书友评论
+                                                        <div class="line_title_cover"></div>
+                                                </div>
+                                                <div class="title-comment-cover-middle">
+                                                </div>
+                                                <!--<div class="title-comment-cover-right">-->
+                                                        <!--共 <span class="title-comment-cover-right-span">2391</span> 条评论-->
+                                                <!--</div>-->
+                                        </div>
+                                        <div class="text-comment-cover">
+                                                <!-- 未登录提醒 -->
+                                                <div id="SOHUCS" sid="{$books_id}"></div>
+                                                <script charset="utf-8" type="text/javascript" src="__JS__/changyan.js" ></script>
+                                                <script type="text/javascript">
+                                                    window.changyan.api.config({
+                                                        appid: '{$changyan.appid}',
+                                                        conf: '{$changyan.conf}'
+                                                    });
+                                                </script>
+
+
+                                                <!-- 评论区域 -->
+
+                                        </div>
+                                </div>
+
+
+                        </div>
+
+                </div>
+
+
+                <div class="cover-chapter-right">
+                        <div class="cover-chapter-right-div" id="js_coverrbdbox" lmk="highly" lmv="强力推荐榜">
+                                <div class="title-comment-cover-left">强力推荐榜<div class="line_title_cover"></div></div>
+                                <div class="cover-rbdbox">
+                                        {volist name='res' id='vo' offset='10' length='10' key='key' }
+                                        <dl class="cover-rbddl">
+                                                <div class="bangdan-num-c">{$key}.</div>
+                                                <dd class="cover-rtdd"><a href="{:url('/cover/index',['books_id'=>$vo.books_id])}"><h4>{$vo.books_name}</h4></a></dd>
+                                                <dd class="cover-rcdd cover-active">
+                                                        <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}" >
+                                                                <img width="53" height="67" src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" >
+                                                                <h4>{$vo.books_name}</h4>
+                                                                <p>{$types[$vo.books_type]}/{$vo.books_author}</p>
+                                                        </a>
+                                                </dd>
+                                        </dl>
+                                        {/volist}
+                                </div>
+                                <!--<p class="ccrl-more">-->
+                                        <!--<a href="./rankinglist.php" style="color:  rgba(235,99,75,1);" lmk="highly-gd" lmv="更多" urltrue="true" lmurl="#">更多-->
+                                                <!--<span class="glyphicon glyphicon-chevron-right"></span></a>-->
+                                <!--</p>-->
+                        </div>
+                </div>
+                <!--
+                <div class="down-shelf">
+                <div class="down-shelf-div">此书已下架，两秒后跳回首页。。。</div>
+                </div> -->
+        </div>
+
+
+
+        <div class="manbox" id="liekbox" lmk="youlike" lmv="猜你喜欢">
+                <div class="mantit youlike">
+                        <h2>猜你喜欢</h2>
+                </div>
+                <div class="rollbox">
+                        <div class="hotseam likeseam">
+                                <ul class="count" nowthis="1" >
+                                        {volist name='res' id='vo' offset='20' length='18' key='key' }
+                                        <li>
+                                                <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                                                        <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" width="120" height="160">
+                                                        <h3>{$vo.books_name}</h3>
+                                                        <p>{$types[$vo.books_type]}/{$vo.books_author}</p>
+                                                </a>
+                                        </li>
+                                        {/volist}
+
+
+                                </ul>
+                        </div>
+
+                        <a class="manlbtn slick-prev" href="javascript:;"></a>
+                        <a class="manrbtn slick-next" href="javascript:;"></a>
+
+                </div>
+        </div>
+        <div class="hotbook" id="coverbd" lmk="hotbangdn" lmv="热门榜单">
+                <div class="hotbkbox">
+                        <h2>热门榜单</h2>
+                        <div class="rollbox">
+                                <div class="hotseam hotban">
+                                        <ul class="count" nowthis="1" >
+                                                {volist name='res' id='vo' offset='70' length='18' key='key' }
+                                                <li>
+                                                        <a href="{:url('/cover/index',['books_id'=>$vo.books_id])}">
+                                                                <img src="__IMG__/cover.jpg" data-src="__BOOKSIMG__/{$vo.books_img}" width="120" height="160">
+                                                                <h3>{$vo.books_name}</h3>
+                                                                <p>{$types[$vo.books_type]}/{$vo.books_author}</p>
+                                                        </a>
+                                                </li>
+                                                {/volist}
+
+
+                                        </ul>
+                                </div>
+
+                                <a class="manlbtn hot-prev" href="javascript:;"></a>
+                                <a class="manrbtn hot-next" href="javascript:;"></a>
+
+                        </div>
+                </div>
+        </div>
+        <div class="cc-background hide"></div>
+
+</div>
+
+
+<input type="hidden" name="url" value="{$data.books_url}">
+<input type="hidden" name="books_id" value="{$books_id}">
+<script>
+
+        $(function () {
+
+
+            //最新章节
+            var books_url = $("input[name='url']").val();
+            var books_id = $("input[name='books_id']").val();
+            $.post('/cover/newchapter',{books_url:books_url,books_id:books_id},function (e) {
+                console.log(e);
+                if(e.code == '200'){
+                    var html = '';
+                    html+='<div class="bknewc"><h2 class="newtit">最新章节</h2><div class="line_title_cover"></div>';
+                    html+='<h3 class="newbktit">'+e.res.chapter_name+'</h3>';
+                    html+='<p class="newtxt "><span class="newchap">'+e.res.chapter_content+'</span><a  href="'+e.res.chapter_url+'"  target="_blank" >(<span>阅读本章</span>)</a>';
+                    html+='</p></div>';
+
+                    $("#new").html(html);
+                }
+            },"json");
+
+
+            $(".addbksj").click(function () {
+
+                var i = $(".addbksj").hasClass('yiadd');
+
+                if(i==false){
+
+                    var books_id ="{$books_id}";
+                    var user_id ="{$session_name_id}";
+                    $.post("/cover/addShelf",{books_id:books_id,user_id:user_id},function (data) {
+                        console.log(data);
+                        if(data.code=='200'){
+                            $(".addbksj").addClass('yiadd');
+                            $(".addbksj").text('已加入书架');
+                        }
+                        layer.msg(data.msg);
+                    },"json");
+
+                }
+
+
+            });
+
+
+            //猜你喜欢
+            lunpo($(".likeseam>ul>li"),$(".slick-next"),$(".slick-prev"));
+
+
+            //热门版单
+            lunpo($(".hotban>ul>li"),$(".hot-next"),$(".hot-prev"),5000);
+
+
+
+            $(".cover-rbddl").mouseover(function(){
+                $(".cover-rbddl").find('.cover-rtdd').removeClass('cover-active');
+                $(".cover-rbddl").find('.cover-rcdd').addClass('cover-active');
+
+                $(this).find('.cover-rcdd').removeClass('cover-active');
+                $(this).find('.cover-rtdd').addClass('cover-active');
+            });
+
+
+
+        })
+
+</script>
+{include file="template/imglazy" /}
+{include file="template/footer" /}

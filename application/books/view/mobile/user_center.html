@@ -1,0 +1,88 @@
+{include file="mobile/header" }
+<link rel="stylesheet" href="__CSS__/mobile_user.css">
+
+
+<div class="page page-level-detail">
+    <div class="content">
+
+
+        <!-- 公用头部 S -->
+        <header id="header" class="header">
+            <a href="javascript:history.go(-1)" class="header-back jsBack">
+                <svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+            </a>
+            <h1 class="header-back-title">VIP等级</h1>
+            <div class="header-operate">
+                <a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+                    <svg><use xlink:href="#icon-search"></use></svg>
+                </a>
+                <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+            </div>
+        </header>
+
+        {include file="mobile/more_navigation" /}
+
+        <!-- 公用头部 E -->
+
+
+
+        <!-- 页面内容 S -->
+
+
+        <div class="level-detail-state">
+
+            <i class="icon-center-level-bg"></i>
+
+            <p>当前VIP等级</p>
+            <h3 class="lvColor1">VIP0</h3>
+
+        </div>
+
+        <div class="module module-merge">
+            <h3 class="level-title">等级特权</h3>
+            <ul class="level-pure-box">
+                <li class="level-pure-item">
+                    <img src="/static/images/user_center/center-level-pri-ce55ba8393.svg" alt="price">
+                    <div class="level-pure-item-fontwra">
+                        <span>5</span>
+                    </div>
+                </li>
+                <li class="level-pure-item">
+                    <img src="/static/images/user_center/center-level-yue-5351471dce.svg" alt="price">
+                    <div class="level-pure-item-fontwra">
+                        <span class="yue">0</span>
+                    </div>
+                </li>
+                <li class="level-pure-item">
+                    <img src="/static/images/user_center/center-level-ding-7c224d536d.svg" alt="price">
+                    <div class="level-pure-item-fontwra">
+                        <span class="ding">2500</span>
+                    </div>
+                </li><li class="level-pure-item">
+                <img src="/static/images/user_center/center-level-shang-3a1e6b6e7c.svg" alt="price">
+                <div class="level-pure-item-fontwra">
+                    <span class="shang">10000</span>
+                </div>
+            </li><li class="level-pure-item">
+                <img src="/static/images/user_center/center-level-song-d8f2957e92.svg" alt="price">
+                <div class="level-pure-item-fontwra">
+                    <span class="song">0</span>
+                </div>
+            </li></ul>
+        </div>
+
+        <div class="module">
+            <h3 class="level-title">等级说明</h3>
+            <div class="level-pure-ul">
+                <p>升级累计消费有价阅币按照过往12个自然月（计算方法如下）动态计算。</p>
+                <p>本月前11个自然月消费总额+当前月消费总额</p>
+                <p>累计消费金额的情况包括：使用有价小说币订阅、打赏、参与网站活动、购买道具等计入消费（仅限Android客户端、M站、PC平台）。</p>
+                <p>升级后可享受订阅优惠以及获赠更多的推荐票。</p>
+            </div>
+        </div>
+
+        <!-- 页面内容 E -->
+    </div>
+</div>
+
+{include file="mobile/footer" }

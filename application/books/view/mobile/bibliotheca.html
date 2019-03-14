@@ -1,0 +1,183 @@
+{include file="mobile/header" }
+<style>
+    @charset "UTF-8";
+    /* 分类页的一些样式 */
+    .module {
+        margin: 0;
+        background-color: #fff;
+        overflow: hidden; }
+
+    .book-sort {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        padding: .75rem 0;
+        height: 3.25rem; }
+
+    .book-pic {
+        font-size: 0;
+        float: left;
+        width: 2.4375rem;
+        height: 3.25rem;
+        margin-right: 0.75rem;
+        margin-left: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+    .book-title {
+        font-size: 1rem;
+        line-height: 1.1;
+        margin-top: 0.5rem; }
+
+    .book-tags {
+        font-size: 0.75rem;
+        margin: .48rem 0;
+        line-height: 0.75rem; }
+
+    .book-li-msg {
+        float: left;
+        width: 50%;
+        overflow: hidden; }
+
+    .book-back {
+        overflow: hidden;
+        background: #f5fff1; }
+
+    .boy::before {
+        border-left: 2px solid #3988FF; }
+
+    .book-cell {
+        overflow: hidden;
+        display: inline-block; }
+
+    .booklist-li-msg {
+        float: left;
+        width: 50%;
+        overflow: hidden; }
+
+    .booklist-module {
+        border-top: 0.5rem solid transparent; }
+
+    .booklist-ol {
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-right: 0.5rem; }
+
+    .booklist1 {
+        background: #E8FFE6;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem; }
+
+    .booklist2 {
+        background: #D8F8FF;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem; }
+
+    .booklist3 {
+        background: #E6E9FF;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem; }
+
+    .booklist4 {
+        background: #FFFCDD;
+        margin-right: 0.5rem; }
+
+    .booklist-sort {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        height: 5rem;
+        padding-top: 0.5rem;
+        border-radius: 0.2rem;
+        text-align: center; }
+
+    .booklist-title {
+        display: inline-block;
+        width: 98%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 0.875rem;
+        color: #000000;
+        filter: opacity(50%); }
+
+    .book-list-container-roundabout {
+        display: block;
+        position: relative;
+        width: 4.125rem;
+        height: 3rem;
+        margin: 0 auto; }
+    .book-list-container-roundabout li {
+        position: absolute;
+        width: 2.25rem;
+        top: 0.5rem; }
+    .book-list-container-roundabout li:active {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+    .book-list-container-roundabout li img {
+        width: 2.25rem;
+        height: 3rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+    .book-list-container-roundabout li.book1 {
+        left: 1rem;
+        top: 0.15625rem;
+        z-index: 1; }
+    .book-list-container-roundabout li.book1 img {
+        width: 2.375rem;
+        height: 3.125rem; }
+    .book-list-container-roundabout li.book2 {
+        left: 2.4375rem; }
+    .book-list-container-roundabout li.book3 {
+        left: -0.3125rem; }
+
+</style>
+<!-- 公用头部 S -->
+<header id="header" class="header">
+    <a href="javascript:history.go(-1)" class="header-back jsBack">
+        <svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+    </a>
+    <h1 class="header-back-title">分类</h1>
+    <div class="header-operate">
+        <a id="openSearchPopup" href="javascript:" class="icon icon-search" title="搜索">
+            <svg><use xlink:href="#icon-search"></use></svg>
+        </a>
+        <a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+    </div>
+</header>
+
+{include file="mobile/more_navigation" /}
+
+<div class="module">
+    <div class="module-header">
+        <div class="module-header-l">
+            <h3 class="module-title boy">所有分类</h3>
+        </div>
+    </div>
+    <ol class="book-ol book-ol-normal">
+
+        {volist name="data" id="vo" key="k" }
+        <li   class="book-li-msg" >
+            <a href="{:url('bibliotheca/index',['type_id'=>$vo.type_id])}" class="book-sort">
+                {empty name="$vo.img"}
+                <img src="__IMG__/cover.jpg" class="book-pic" alt="{$vo.type_name}">
+
+                {else /}
+                <img src="__BOOKSIMG__/{$vo.img}" class="book-pic" alt="{$vo.type_name}">
+
+                {/empty}
+
+                <div class="book-cell">
+                    <div class="book-title-x">
+                        <h4 class="book-title">{$vo.type_name}</h4>
+                    </div>
+                    <p class="book-tags">
+                        <em>{$vo.num}本</em>
+                    </p>
+                </div>
+            </a>
+        </li>
+        {/volist}
+
+
+    </ol>
+</div>
+
+{include file="mobile/footer" }

@@ -1,0 +1,98 @@
+{include file="mobile/header" /}
+
+<div class="page page-chapter">
+	<div class="content">
+		<!-- 公用头部 S -->
+		<header id="header" class="header">
+		<a href="javascript:history.go(-1)" class="header-back jsBack">
+		<svg class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+		</a>
+		<h1 class="header-back-title">{$books_name}</h1>
+		<div class="header-operate">
+			<a id="searchcatalog" href="#" class="icon icon-search" title="搜索">
+			<svg><use xlink:href="#icon-search"></use></svg>
+			</a>
+			<a id="openGuide" href="javascript:" class="icon icon-more" title="更多" data-rel="guide"></a>
+		</div>
+		</header>
+		{include file="mobile/more_navigation" /}
+		<!-- 公用头部 E -->
+		<!-- 页面内容 S -->
+		<div id="catalogWrapper" data-book-id="9957174303982103">
+			<div id="chapterNav" class="btn-group-tab">
+				<nav class="btn-group">
+				<h3 class="btn-group-cell"><a href="#" class="btn-blank active" data-rel="catelogX">目录</a></h3>
+				</nav>
+			</div>
+			<div class="module module-merge">
+				<!-- 目录页内容 -->
+				<div id="catelogX" class="chapter-tab-x active">
+					<div class="module-header">
+						<div class="module-header-l">
+							<h4 class="chapter-sub-title">共<output>{$chapter_num}</output>章</h4>
+						</div>
+						<div class="module-header-r">
+							<a id="reverse" href="javascript:;" class="module-header-btn dark">正序</a>
+						</div>
+					</div>
+					<div class="chapter-bar">正文卷</div>
+					<ol id="vo" >
+
+						{volist name="data" id="vo" key="key"}
+						<li class="chapter-li ">
+						<a href="{:url('/info/index',['books_id'=>$books_id,'chapter_url'=>$vo[1]])}" class="chapter-li-a" >
+						<span class="chapter-index ">{$vo[0]}</span>
+						<svg class="icon icon-lock"><use xlink:href="#icon-lock"></use></svg>
+						</a>
+						</li>
+						{/volist}
+
+
+
+					</ol>
+
+				</div>
+				<!-- 书签页内容 -->
+				<div id="bookmarkX" class="chapter-tab-x">
+				</div>
+			</div>
+		</div>
+		<!-- 页面内容 E -->
+	</div>
+</div>
+<a href="#header" class="footer-backtop-circle jsBackToTop" title="返回顶部" style="opacity: 1; visibility: visible;"><svg class="icon icon-backtop"><use xlink:href="#icon-backtop"></use></svg></a>
+<script>
+	$(function () {
+        $("#searchcatalog,#closeSearchPopup").click(function () {
+            $("#searchPopup").toggle();
+        });
+
+        //手机端目录倒序
+        $('#reverse').click(function(){
+            //loading层
+            layer.open({type: 2 ,time: 2});
+            var len = $("#vo>li").length;
+            var liCollection = $("#vo>li");
+            var html='';
+            liCollection.each(function(i){
+                html+='<li>';
+                html+= liCollection.eq(len-i-1).html();
+                html+='</li>';
+
+            });
+            layer.closeAll();
+
+            var txt = $(this).text();
+            if(txt == '正序'){
+                $(this).text('倒序');
+			}else{
+                $(this).text('正序');
+			}
+
+            $('#vo').html(html);
+
+        });
+    })
+</script>
+
+{include file="mobile/footer" /}

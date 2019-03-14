@@ -1,0 +1,79 @@
+{include file="mobile/header" /}
+
+    <!-- SVG图标 E -->
+
+    
+        <div class="page">
+            <div class="content">
+                
+                    
+                        <!-- 公用头部 S -->
+                        <header id="header" class="header">
+                            
+                                
+    
+    <a href="javascript:history.go(-1)" class="header-back jsBack">
+        <svg  class="icon icon-arrow-l"><title>返回</title><use xlink:href="#icon-arrow-l"></use></svg>
+    </a>
+
+                            
+                            
+                                <h1 class="header-back-title">书评区</h1>
+                            
+
+                            
+
+                            
+                                <div class="header-operate">
+                                    
+                                        
+                                            <a id="openSearchPopup" href="#" class="icon icon-search" title="搜索">
+                                                <svg><use xlink:href="#icon-search"></use></svg>
+                                            </a>
+                                        
+                                        
+                                            <a id="openGuide" href="#" class="icon icon-more" title="更多" data-rel="guide"></a>
+                                        
+                                    
+                                </div>
+                            
+                        </header>
+
+                        
+
+
+                <!-- 页面内容 S -->
+
+
+
+                <div class="module"></div>
+            <!-- 书评区 -->
+            <div class="module trigger-book-comment" id="book-commnet-container" data-load-status="loading">
+
+                <div class="module-content elIconGoodWrap" style="padding:10px 0px;">
+
+                    <!--WAP版-->
+                    <div id="SOHUCS" sid="{$books_id}" ></div>
+                    <script id="changyan_mobile_js" charset="utf-8" type="text/javascript"
+                            src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=cytGk2A0h&conf=prod_588f079f2cbaab4bd1ddcaa19dd4a27a">
+                    </script>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- 同类推荐 -->
+
+            
+
+
+
+                
+            </div>
+        </div>
+
+
+
+    {include file="mobile/footer" /}

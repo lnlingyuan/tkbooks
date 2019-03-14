@@ -1,0 +1,77 @@
+{include file="template/header" /}
+{include file="template/headerCon" /}
+
+
+<div class="contetline">
+    <div class="content">
+        <div class="cover-nav">
+            <p>&gt; <a class="booktitle" href="{:url('/cover/index',['books_id'=>$books_id])}">{$books_name}</a> &gt; <span>所有章节</span></p>
+        </div>
+        <div class="bookMeta">
+            <h3 class="chatit">{$books_name}</h3>
+            <p class="chaauto">{$books_author}</p>
+        </div>
+        <dl class="zjlistdl">
+            <dt><a class="descsort" id="js_sort" href="javascript:;"></a></dt>
+        </dl>
+        <ul class="chapterul clearfix menus" id="chapterlists">
+
+            {volist name="data" id="vo" key="key"}
+            <li {gt name="$key" value="60"}style='display: none;'{/gt} ><a   href="{:url('/info/index',['books_id'=>$books_id,'chapter_url'=>$vo[1]])}" target="_blank" >{$vo[0]}</a></li>
+            {/volist}
+
+        </ul>
+    </div>
+
+        <div class="paging">
+            <div class="pagingbox"></div>
+        </div>
+
+</div>
+<script src="__JS__/jquery.pagination.js"></script>
+
+<script>
+    $(function () {
+        //计算总记录数
+        var list = $("#chapterlists li").length;
+
+        //调用分页插件
+        $('.pagingbox').pagination({
+            mode: 'fixed',
+            totalData:list,
+            showData:60,
+            prevContent: '上页',
+            nextContent: '下页',
+            keepShowPN:true,
+
+        });
+
+
+        $(".pagingbox").on('click', 'a', function () {
+            setTimeout(function(){
+                page();
+            },10);
+        });
+
+        //倒序时重新分页，避免错乱
+        $("#js_sort").click(function () {
+            page();
+        });
+
+        //单击显示条数
+        function page() {
+            var num = $(".pagingbox>.active").text();
+            var star = (num-1)*60;
+            var end = num*60;
+            var a =  $("#chapterlists li");
+            a.hide();
+            a.each(function (e) {
+                if(e>=star && e<end){
+                    $(this).show();
+                }
+            });
+        }
+    });
+</script>
+
+{include file="template/footer" /}

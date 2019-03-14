@@ -1,0 +1,125 @@
+{include file="template/iframe_header" /}
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input type="text" name="user_name"  placeholder="请输入用户名" autocomplete="off" value="{$res.user_name}" class="layui-input">
+            <input type="text" name="user_email"  placeholder="请输入用户邮箱" autocomplete="off" value="{$res.user_email}"  class="layui-input">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <button class="layui-btn" onclick='x_admin_show("添加用户","{:url(\'user/add'\)}")'><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：{$num} 条</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>邮箱</th>
+            <th>加入时间</th>
+            <th>状态</th>
+            <th>操作</th></tr>
+        </thead>
+        <tbody>
+
+        {volist name='$data' id='vo' }
+        <tr>
+            <td>
+                <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='{$vo.user_id}'><i class="layui-icon">&#xe605;</i></div>
+            </td>
+            <td>{$vo.user_id}</td>
+            <td>{$vo.user_name}</td>
+            <td>{$vo.user_email}</td>
+            <td>{$vo.add_time}</td>
+            <td class="td-status">
+                {if condition="$vo.is_disable==0"}
+                <button class="layui-btn layui-btn-xs">已启用</button>
+                {else /}
+                <button class="layui-btn layui-btn-primary layui-btn-xs">已禁用</button>
+                {/if}
+            </td>
+            <td class="td-manage">
+
+                <a title="编辑"  onclick="x_admin_show('编辑','{:url(\'user/edit'\,[\'user_id'\=>$vo.user_id])}')" href="javascript:;">
+                    <i class="layui-icon">&#xe642;</i>
+                </a>
+                <a onclick="x_admin_show('修改密码','{:url(\'user/userPwd\',[\'user_id'\=>$vo.user_id])}')" title="修改密码" href="javascript:;">
+                    <i class="layui-icon">&#xe631;</i>
+                </a>
+                <a title="删除" onclick="member_del(this,'{$vo.user_id}')" href="javascript:;">
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+            </td>
+        </tr>
+{/volist}
+        </tbody>
+    </table>
+
+
+
+    <div class="page">
+        <div>
+            {$data->render()}
+        </div>
+    </div>
+
+</div>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+
+
+
+    /*用户-删除*/
+    function member_del(obj,user_id){
+        layer.confirm('确认要删除吗？',function(index){
+
+            $.post('/admin.php/user/delete',{user_id:user_id},function (e) {
+                if(e.code==1) {
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                }else{
+                    layer.msg('删除失败!',{icon:2,time:1000});
+                }
+            });
+
+
+        });
+    }
+
+
+
+    function delAll (argument) {
+
+        var data = tableCheck.getData();
+
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+    }
+    
+
+    
+</script>
+
+</body>
+
+</html>
