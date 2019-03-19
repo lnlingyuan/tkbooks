@@ -18,7 +18,7 @@
         /*清除缓存*/
         function cache_clear(){
             layer.confirm('确认要清除缓存吗？',function(index){
-                $.post('/admin.php/index/delete','',function (e) {
+                $.post('/admin.php/index/clear','',function (e) {
                     layer.msg('缓存清成功',{icon:1,time:1000});
                 });
 
